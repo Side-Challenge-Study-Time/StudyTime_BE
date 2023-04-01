@@ -27,6 +27,22 @@
   </tr>
 </table>
 
+### 프로젝트 구조도
+```bash
+src
+├── global 
+│   ├── exception
+│   ├── config
+│   ├── interceptor
+│   └── jwt
+│  
+└── domain
+    ├── 
+    ├── 
+    └── 
+ 
+```
+
 
 # 👨‍🔧기술 스택
 - Java11, Spring Boot2.7.10, Spring Security
