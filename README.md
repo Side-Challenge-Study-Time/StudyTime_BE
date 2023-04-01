@@ -1,6 +1,6 @@
 # 📖스터디 약속을 부탁해, 스터디 타임
 
-<img src="https://user-images.githubusercontent.com/103854287/229304023-5cd76539-1c4a-450d-a79e-4d8b814c46c8.png" style="width: 100%; height: 50%;" />
+<img src="https://user-images.githubusercontent.com/103854287/229304023-5cd76539-1c4a-450d-a79e-4d8b814c46c8.png" style="width: 70%; height: 50%;" />
 
 ### 프로젝트 기간
 - 기획 및 설계
