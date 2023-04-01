@@ -1,4 +1,4 @@
-# 📖스터디 약속을 부탁해, 스터디 타임
+# 📖 스터디 약속을 부탁해, 스터디 타임
 
 
 <p align="center">
@@ -60,7 +60,7 @@ src
 - GitHub, Git, SLACK, Notion
 - Amazon AWS
 
-# ✍프로젝트 목표
+# ✍ 프로젝트 목표
 1. 문서화를 통한 협업
 
 2. 테스트 코드
@@ -68,4 +68,6 @@ src
 3. Git-Flow
 
 
-# 🧊ERD Diagram
+# 🧊 ERD Diagram
+
+# 🏛️ Architecture
