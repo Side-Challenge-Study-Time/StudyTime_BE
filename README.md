@@ -2,9 +2,10 @@
 
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/103854287/229304023-5cd76539-1c4a-450d-a79e-4d8b814c46c8.png" style="width: 60%; height: 40%;" />
+<img src="https://user-images.githubusercontent.com/103854287/229304023-5cd76539-1c4a-450d-a79e-4d8b814c46c8.png" style="width: 50%; height: 40%;" />
 </p>
 
+### 프로젝트 소개
 
 ### 프로젝트 기간
 - 기획 및 설계
