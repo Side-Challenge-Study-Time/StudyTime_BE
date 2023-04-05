@@ -92,7 +92,7 @@ src
   </tr>
     <tr>
     <td>
-         💄move
+         🔥move
     </td>
      <td>
         파일, 코드의 이동
@@ -100,10 +100,10 @@ src
   </tr>
     <tr>
     <td>
-         refactor
+         💚build
     </td>
      <td>
-        💚build
+         빌드 관련 파일을 수정
     </td>
   </tr>
     <tr>
@@ -111,7 +111,7 @@ src
          ♻️refactor
     </td>
      <td>
-        빌드 관련 파일을 수정
+       코드의 리팩토링을 의미
     </td>
   </tr>
 </table>
