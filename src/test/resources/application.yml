@@ -16,3 +16,6 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug
+  slack:
+      webhook-uri: https://hooks.slack.com/services/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
+      config: classpath:logback-spring.xml
