@@ -2,7 +2,7 @@ package com.challenge.studytime.global.initializer;
 
 import com.challenge.studytime.domain.role.entity.Role;
 import com.challenge.studytime.domain.role.enums.RoleEnum;
-import com.challenge.studytime.domain.role.repositry.RoleRepositry;
+import com.challenge.studytime.domain.role.repositry.RoleRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,17 +11,17 @@ import org.springframework.context.annotation.Configuration;
 public class RoleInitializer {
 
     @Bean
-    public CommandLineRunner initRoles(RoleRepositry roleRepository) {
+    public CommandLineRunner initRoles(RoleRepository roleRepository) {
         return args -> {
             if (roleRepository.count() == 0) {
                 Role userRole = Role.builder()
                         .roleId(1L)
-                        .name(RoleEnum.ROLE_MEMBER.getRoleName())
+                        .name(RoleEnum.ROLE_USER.getRoleName())
                         .build();
 
-                Role adminRole = Role.builder()
+                Role customerRole = Role.builder()
                         .roleId(2L)
-                        .name(RoleEnum.ROLE_ADMIN.getRoleName())
+                        .name(RoleEnum.ROLE_CUSTOMER.getRoleName())
                         .build();
 
                 Role studyLeader = Role.builder()
@@ -35,7 +35,7 @@ public class RoleInitializer {
                         .build();
 
                 roleRepository.save(userRole);
-                roleRepository.save(adminRole);
+                roleRepository.save(customerRole);
                 roleRepository.save(studyLeader);
                 roleRepository.save(studyMember);
             }
