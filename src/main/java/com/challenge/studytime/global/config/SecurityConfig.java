@@ -5,19 +5,18 @@ import com.challenge.studytime.global.jwt.exception.CustomAuthenticationEntryPoi
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsUtils;
 
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.security.config.http.SessionCreationPolicy.*;
+import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
-// Spring Security 설정.
 @Configuration
 @RequiredArgsConstructor
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     private final AuthenticationManagerConfig authenticationManagerConfig;
@@ -38,20 +37,15 @@ public class SecurityConfig {
                 .httpBasic().disable()
                 .authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-                .mvcMatchers("/**").permitAll()
-                .mvcMatchers(GET, "/**").hasAnyRole("USER", "ADMIN")
-                .mvcMatchers(POST, "/**").hasAnyRole("USER", "ADMIN")
-                .anyRequest().hasAnyRole("USER", "ADMIN")
+                .mvcMatchers("/api/member/signUp","/api/member/login","/api/member/signUpCustomer","/api/member/logout","/api/member/refreshToken").permitAll()
+                .mvcMatchers(GET, "/**").hasAnyRole("USER", "CUSTOMER")
+                .mvcMatchers(POST, "/**").hasAnyRole("USER", "CUSTOMER")
+                .anyRequest().hasAnyRole("USER", "CUSTOMER")
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(customAuthenticationEntryPoint)
                 .and()
                 .build();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 }
 
