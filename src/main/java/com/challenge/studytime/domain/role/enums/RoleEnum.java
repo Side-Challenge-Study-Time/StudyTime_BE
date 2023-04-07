@@ -2,14 +2,14 @@ package com.challenge.studytime.domain.role.enums;
 
 import lombok.Getter;
 
+@Getter
 public enum RoleEnum {
 
-    ROLE_ADMIN("ROLE_ADMIN"),
-    ROLE_MEMBER("ROLE_MEMBER"),
+    ROLE_CUSTOMER("ROLE_CUSTOMER"),
+    ROLE_USER("ROLE_USER"),
     ROLE_STUDY_LEADER("ROLE_STUDY_LEADER"),
-    ROLE_STUDY_MEMBER("ROLE_STUDY_MEMBER");
+    ROLE_STUDY_MEMBER("ROLE_STUDY_USER");
 
-    @Getter
     private String roleName;
 
 
