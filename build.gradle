@@ -31,7 +31,8 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     //h2
-    runtimeOnly 'com.h2database:h2'
+//    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'com.mysql:mysql-connector-j'
 
     //lombok
     compileOnly 'org.projectlombok:lombok'
