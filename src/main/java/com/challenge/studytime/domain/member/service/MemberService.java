@@ -49,10 +49,8 @@ public class MemberService {
                 .password(passwordEncoder.encode(loginDto.getPassword()))
                 .build();
 
-        Optional<Role> userRole = roleRepository
-                .findByName(RoleEnum.ROLE_USER.getRoleName());
-
-        member.addRole(userRole.get());
+        Optional<Role> userRole = roleRepository.findByName(RoleEnum.ROLE_USER.getRoleName());
+        userRole.ifPresent(member::addRole);
 
         return MemberSignupResponseDto.toDto(memberRepositry.save(member));
     }
