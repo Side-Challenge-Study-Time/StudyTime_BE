@@ -40,7 +40,7 @@ public class Study {
     }
 
     //연관관계 편의 메소드
-    public void changeMember(Member member) {
+    public void addMemberWithStudy(Member member) {
         this.member = member;
         member.getStudyList().add(this);
     }

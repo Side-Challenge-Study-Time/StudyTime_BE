@@ -41,6 +41,7 @@ public class StudyService {
         Optional<Role> leaderRole = roleRepository.findByName(RoleEnum.ROLE_STUDY_LEADER.getRoleName());
         leaderRole.ifPresent(member::addRole);
 
+
         memberRepositry.save(member);
 
         return StudyResponseDto.toDto(studyRepositry.save(study));
