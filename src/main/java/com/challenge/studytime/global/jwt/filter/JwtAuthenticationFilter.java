@@ -43,11 +43,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         } catch (NullPointerException | IllegalStateException e) {
             extracted(request, JwtExceptionCode.NOT_FOUND_TOKEN, "Not found Token // token : {}", token, "throw new not found token exception");
-        } catch (SecurityException | MalformedJwtException e) {
+        } catch (SecurityException | MalformedJwtException e) {//JWT 토큰의 서명이나 암호화와 관련된 오류입니다. -> 시그니처 오류
             extracted(request, JwtExceptionCode.INVALID_TOKEN, "Invalid Token // token : {}", token, "throw new invalid token exception");
-        } catch (ExpiredJwtException e) {
+        } catch (ExpiredJwtException e) {//JWT 토큰의 만료 시간이 지났을 때 발생하는 오류입니다.
             extracted(request, JwtExceptionCode.EXPIRED_TOKEN, "EXPIRED Token // token : {}", token, "throw new expired token exception");
-        } catch (UnsupportedJwtException e) {
+        } catch (UnsupportedJwtException e) {//지원되지 않는 JWT 토큰 형식이나 구조를 사용했을 때 발생하는 오류입니다.
             extracted(request, JwtExceptionCode.UNSUPPORTED_TOKEN, "Unsupported Token // token : {}", token, "throw new unsupported token exception");
         } catch (Exception e) {
             log.error("JwtFilter - doFilterInternal() 오류 발생");
@@ -65,11 +65,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private void getAuthentication(String token) {
+        //token을 담는다.
         JwtAuthenticationToken authenticationToken = new JwtAuthenticationToken(token);
+        //토큰을 가지고 Authentication 객체를 만드는데 가지고 있는 내용은 id,role
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
 
         SecurityContextHolder.getContext()
-                .setAuthentication(authenticate);
+                .setAuthentication(authenticate);//언제든지 인증 정보를 가져올 수 있다.
     }
 
     private String getToken(HttpServletRequest request) {
