@@ -62,6 +62,7 @@ public class MemberService {
     public MemberSignupResponseDto signUpCustomer(MemberSignupDto signupDto) {
 
         String memberEmail = signupDto.getEmail();
+
         if (memberRepositry.existsByEmail(memberEmail)) {
             throw new UserEmailDuplicationException(memberEmail);
         }
