@@ -47,8 +47,8 @@ public class JwtTokenizer {
                                Long expire, byte[] secretKey) {
         Claims claims = Jwts.claims().setSubject(email);
 
+        claims.put("memberId", id);
         claims.put("roles", roles);
-        claims.put("userId", id);
 
         return Jwts.builder()
                 .setClaims(claims)

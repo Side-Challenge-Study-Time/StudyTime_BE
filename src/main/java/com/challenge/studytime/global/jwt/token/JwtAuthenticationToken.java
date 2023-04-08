@@ -8,11 +8,9 @@ import java.util.Collection;
 
 @Getter
 public class JwtAuthenticationToken extends AbstractAuthenticationToken {
-
     private String token;
     private Object principal;
     private Object credentials;
-
 
     public JwtAuthenticationToken(Collection<? extends GrantedAuthority> authorities,
                                   Object principal, Object credentials) {
@@ -35,6 +33,6 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
 
     @Override
     public Object getPrincipal() {
-        return this.credentials;
+        return this.principal;
     }
 }
