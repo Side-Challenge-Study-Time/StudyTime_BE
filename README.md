@@ -126,6 +126,7 @@ src
 
 
 # 🧊 ERD Diagram
-![image](https://user-images.githubusercontent.com/103854287/230086603-130323f3-e1ce-4278-b9fe-9af6380ec0b7.png)
+![image](https://user-images.githubusercontent.com/103854287/230743169-928d74c7-2983-4780-8bfc-a600b641f9dd.png)
+
 
 # 🏛️ Architecture
