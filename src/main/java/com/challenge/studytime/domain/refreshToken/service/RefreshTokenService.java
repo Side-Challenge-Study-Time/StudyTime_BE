@@ -47,7 +47,7 @@ public class RefreshTokenService {
                 .orElseThrow(() -> new NotFoundMemberEmail(refreshTokenDto.getRefreshToken()));
 
         Claims claims = jwtTokenizer.parseRefreshToken(refreshToken.getValue());
-        Long userId = Long.valueOf((Integer) claims.get("userId"));
+        Long userId = Long.valueOf((Integer) claims.get("memberId"));
 
         Member member = memberRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundMemberid(userId));
