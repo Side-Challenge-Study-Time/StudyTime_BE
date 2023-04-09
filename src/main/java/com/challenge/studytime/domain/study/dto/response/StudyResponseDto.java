@@ -1,4 +1,4 @@
-package com.challenge.studytime.domain.study.dto;
+package com.challenge.studytime.domain.study.dto.response;
 
 import com.challenge.studytime.domain.study.entity.Study;
 import lombok.AllArgsConstructor;

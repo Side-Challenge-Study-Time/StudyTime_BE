@@ -1,4 +1,4 @@
-package com.challenge.studytime.domain.study.dto;
+package com.challenge.studytime.domain.study.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
