@@ -5,13 +5,18 @@ import com.challenge.studytime.domain.member.repositry.MemberRepositry;
 import com.challenge.studytime.domain.role.entity.Role;
 import com.challenge.studytime.domain.role.enums.RoleEnum;
 import com.challenge.studytime.domain.role.repositry.RoleRepository;
-import com.challenge.studytime.domain.study.dto.StudyRequestDto;
-import com.challenge.studytime.domain.study.dto.StudyResponseDto;
+import com.challenge.studytime.domain.study.dto.request.StudyRequestDto;
+import com.challenge.studytime.domain.study.dto.request.StudySearchDto;
+import com.challenge.studytime.domain.study.dto.response.StudyResponseDto;
+import com.challenge.studytime.domain.study.dto.response.StudySearcResponseDto;
 import com.challenge.studytime.domain.study.entity.Study;
-import com.challenge.studytime.domain.study.repository.StudyRepositry;
+import com.challenge.studytime.domain.study.repository.StudyRepository;
 import com.challenge.studytime.global.exception.member.NotFoundMemberid;
 import com.challenge.studytime.global.util.LoginUserDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +27,7 @@ import java.util.Optional;
 public class StudyService {
 
     private final MemberRepositry memberRepositry;
-    private final StudyRepositry studyRepositry;
+    private final StudyRepository studyRepositry;
     private final RoleRepository roleRepository;
 
     @Transactional
@@ -47,4 +52,13 @@ public class StudyService {
         return StudyResponseDto.toDto(studyRepositry.save(study));
     }
 
+    @Transactional(readOnly = true)
+    public Page<StudySearcResponseDto> fullSearch(
+            StudySearchDto requestDto,
+            int page,
+            int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return studyRepositry.fullSrchWithStudy(requestDto, pageable);
+    }
 }
