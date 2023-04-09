@@ -4,6 +4,7 @@ import com.challenge.studytime.domain.coupon.entity.Coupon;
 import com.challenge.studytime.domain.couponhistory.dto.CouponHistoryRequestDto;
 import com.challenge.studytime.domain.member.entity.Member;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,16 +23,16 @@ public class CouponHistory {
     @JoinColumn(name = "coupon_id")
     private Coupon coupon;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "member_id")
-//    private Member member;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
     private Boolean used;
     private UUID uuid;
-    private Long memberId;
-    public void setCoupon(Coupon coupon, CouponHistoryRequestDto requestDto) {
+    @Builder
+    public void setCoupon(Member member, Coupon coupon) {
         this.coupon = coupon;
         this.used = false;
         this.uuid = UUID.randomUUID();
-        this.memberId = requestDto.getUserId();
+        this.member = member;
     }
 }

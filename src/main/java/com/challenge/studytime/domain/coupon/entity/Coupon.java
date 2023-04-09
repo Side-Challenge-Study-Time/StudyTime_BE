@@ -44,6 +44,6 @@ public class Coupon {
         this.endAt = requestDto.getEndAt();
     }
     public void setIssuedCount(int issuedCount) {
-        this.issuedCount = issuedCount;
+        this.issuedCount = issuedCount + 1;
     }
 }
