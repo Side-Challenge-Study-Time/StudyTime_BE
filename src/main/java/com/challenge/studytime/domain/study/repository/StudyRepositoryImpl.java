@@ -1,8 +1,10 @@
 package com.challenge.studytime.domain.study.repository;
 
+import com.challenge.studytime.domain.member.entity.QMember;
 import com.challenge.studytime.domain.study.dto.request.StudySearchDto;
 import com.challenge.studytime.domain.study.dto.response.QStudySearcResponseDto;
 import com.challenge.studytime.domain.study.dto.response.StudySearcResponseDto;
+import com.challenge.studytime.domain.study.entity.QStudy;
 import com.challenge.studytime.domain.study.entity.Study;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -14,8 +16,9 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 
-import static com.challenge.studytime.domain.member.entity.QMember.member;
-import static com.challenge.studytime.domain.study.entity.QStudy.study;
+import static com.challenge.studytime.domain.member.entity.QMember.*;
+import static com.challenge.studytime.domain.study.entity.QStudy.*;
+
 
 public class StudyRepositoryImpl implements StudyRepositoryCustom {
 
