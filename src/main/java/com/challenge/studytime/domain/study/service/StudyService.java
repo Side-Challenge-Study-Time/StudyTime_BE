@@ -5,6 +5,7 @@ import com.challenge.studytime.domain.member.repositry.MemberRepositry;
 import com.challenge.studytime.domain.role.entity.Role;
 import com.challenge.studytime.domain.role.enums.RoleEnum;
 import com.challenge.studytime.domain.role.repositry.RoleRepository;
+import com.challenge.studytime.domain.study.dto.request.StudyModifyRequestDto;
 import com.challenge.studytime.domain.study.dto.request.StudyRequestDto;
 import com.challenge.studytime.domain.study.dto.request.StudySearchDto;
 import com.challenge.studytime.domain.study.dto.response.StudyResponseDto;
@@ -27,7 +28,7 @@ import java.util.Optional;
 public class StudyService {
 
     private final MemberRepositry memberRepositry;
-    private final StudyRepository studyRepositry;
+    private final StudyRepository studyRepository;
     private final RoleRepository roleRepository;
 
     @Transactional
@@ -49,7 +50,7 @@ public class StudyService {
 
         memberRepositry.save(member);
 
-        return StudyResponseDto.toDto(studyRepositry.save(study));
+        return StudyResponseDto.toDto(studyRepository.save(study));
     }
 
     @Transactional(readOnly = true)
@@ -59,6 +60,29 @@ public class StudyService {
             int size
     ) {
         Pageable pageable = PageRequest.of(page, size);
-        return studyRepositry.fullSrchWithStudy(requestDto, pageable);
+        return studyRepository.fullSrchWithStudy(requestDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public StudyResponseDto detailStudy(Long studyId) {
+        Study study = studyRepository.findByIdAndDeleteStudyFalse(studyId)
+                .orElseThrow();
+        return StudyResponseDto.toDto(study);
+    }
+
+    @Transactional
+    public void deleteByStudy(Long id) {
+        Study study = studyRepository.findByIdAndDeleteStudyFalse(id)
+                .orElseThrow();
+        study.changeStudy();
+    }
+
+    @Transactional
+    public StudyResponseDto modifyById(Long id, StudyModifyRequestDto studyModifyRequestDto) {
+        Study study = studyRepository.findByIdAndDeleteStudyFalse(id)
+                .orElseThrow();
+
+        study.updateStudy(studyModifyRequestDto);
+        return StudyResponseDto.toDto(study);
     }
 }
