@@ -8,6 +8,7 @@ import com.challenge.studytime.domain.couponhistory.entity.CouponHistory;
 import com.challenge.studytime.domain.couponhistory.repository.CouponHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +17,7 @@ public class CouponHistoryService {
     private final CouponRepository couponRepository;
 //    private final UserRepository userRepository;
 
+    @Transactional
     public CouponHistoryResponseDto createCouponHistory(CouponHistoryRequestDto requestDto, Long couponId) {
 //        Long userId = requestDto.getUserId();
 
