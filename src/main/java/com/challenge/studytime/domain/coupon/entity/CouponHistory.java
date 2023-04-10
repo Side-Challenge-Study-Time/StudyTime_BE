@@ -1,7 +1,6 @@
-package com.challenge.studytime.domain.couponhistory.entity;
+package com.challenge.studytime.domain.coupon.entity;
 
 import com.challenge.studytime.domain.coupon.entity.Coupon;
-import com.challenge.studytime.domain.couponhistory.dto.CouponHistoryRequestDto;
 import com.challenge.studytime.domain.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,14 +25,14 @@ public class CouponHistory {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+    @Column(nullable = false, length = 10)
     private Boolean used;
-    private UUID uuid;
     //연관 관계 메소드 수정
     @Builder
+//    set말고 명칭 수정
     public void setCoupon(Member member, Coupon coupon) {
         this.coupon = coupon;
         this.used = false;
-        this.uuid = UUID.randomUUID();
         this.member = member;
     }
 }
