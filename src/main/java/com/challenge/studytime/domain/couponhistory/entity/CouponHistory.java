@@ -28,6 +28,7 @@ public class CouponHistory {
     private Member member;
     private Boolean used;
     private UUID uuid;
+    //연관 관계 메소드 수정
     @Builder
     public void setCoupon(Member member, Coupon coupon) {
         this.coupon = coupon;

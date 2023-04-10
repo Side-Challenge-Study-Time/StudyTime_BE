@@ -1,5 +1,6 @@
 package com.challenge.studytime.domain.couponhistory.controller;
 
+import com.challenge.studytime.domain.coupon.dto.CouponRequestDto;
 import com.challenge.studytime.domain.couponhistory.dto.CouponHistoryRequestDto;
 import com.challenge.studytime.domain.couponhistory.dto.CouponHistoryResponseDto;
 import com.challenge.studytime.domain.couponhistory.service.CouponHistoryService;
@@ -21,5 +22,9 @@ public class CouponHistoryController {
     public ResponseEntity<CouponHistoryResponseDto> createCouponHistory(@PathVariable("couponId") Long couponId, @IfLogin LoginUserDto userDto) {
         CouponHistoryResponseDto couponHistoryResponseDto = couponHistoryService.createCouponHistory(couponId, userDto);
         return ResponseEntity.ok(couponHistoryResponseDto);
+    }
+    @GetMapping("/search")
+    public ResponseEntity fullSearchCoupon(@IfLogin LoginUserDto userDto){
+        return ResponseEntity.ok(couponHistoryService.fullSearchCoupon(userDto));
     }
 }
