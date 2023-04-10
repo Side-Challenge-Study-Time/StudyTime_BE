@@ -1,6 +1,8 @@
 package com.challenge.studytime.global.exception.controller;
 
 import com.challenge.studytime.global.exception.ErrorResponse;
+import com.challenge.studytime.global.exception.coupon.CouponNameDuplicationException;
+import com.challenge.studytime.global.exception.coupon.NotFoundCoupon;
 import com.challenge.studytime.global.exception.member.NotMatchPassword;
 import com.challenge.studytime.global.exception.member.UserEmailDuplicationException;
 import com.challenge.studytime.global.exception.refreshToken.NotFoundRefreshToken;
@@ -38,5 +40,18 @@ public class ControllerErrorAdvice {
         return new ErrorResponse("400", "NotMatchPassword");
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(CouponNameDuplicationException.class)
+    public ErrorResponse CouponNameDuplicationException() {
+        log.error("CouponName is already existed");
+        return new ErrorResponse("400", "CouponName is already existed");
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NotFoundCoupon.class)
+    public ErrorResponse NotFoundCoupon() {
+        log.error("NOT Found COUPON ");
+        return new ErrorResponse("400", "Not Found Coupon");
+    }
 
 }
