@@ -1,5 +1,6 @@
 package com.challenge.studytime.domain.study.entity;
 
+import com.challenge.studytime.domain.image.entity.ImageData;
 import com.challenge.studytime.domain.member.entity.Member;
 import com.challenge.studytime.domain.study.dto.request.StudyModifyRequestDto;
 import lombok.AllArgsConstructor;
@@ -38,6 +39,9 @@ public class Study {
     @OneToMany(mappedBy = "study", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StudyMember> studyMembers = new ArrayList<>();
 
+    @OneToMany(mappedBy = "studys", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ImageData> imageDataList = new ArrayList<>();
+
 
     @Builder.Default
     private boolean deleteStudy = false;
@@ -45,6 +49,8 @@ public class Study {
     public void changeStudy() {
         deleteStudy = true;
     }
+
+
 
     public void decreaseMembersCount() {
         this.membersCount--;
