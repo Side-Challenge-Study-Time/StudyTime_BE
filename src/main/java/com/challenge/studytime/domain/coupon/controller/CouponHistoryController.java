@@ -12,18 +12,18 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/coupon-history")
+@RequestMapping("/api/couponHistory")
 @RequiredArgsConstructor
 public class CouponHistoryController {
     private final CouponHistoryService couponHistoryService;
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/{couponId}")
+    @PostMapping("/create/{couponId}")
     public CouponHistoryResponseDto createCouponHistory(@PathVariable("couponId") Long couponId, @IfLogin LoginUserDto userDto) {
         CouponHistoryResponseDto couponHistoryResponseDto = couponHistoryService.createCouponHistory(couponId, userDto);
         return couponHistoryResponseDto;
     }
     @ResponseStatus(HttpStatus.CREATED)
-    @GetMapping("/user-search")
+    @GetMapping("/search/user")
     public List<CouponHistoryResponseDto> SearchCoupon(@IfLogin LoginUserDto userDto){
         return couponHistoryService.SearchUserCoupon(userDto);
     }
