@@ -39,12 +39,6 @@ dependencies {
     //validation
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-    //slack
-    implementation("com.slack.api:bolt:1.18.0")
-    implementation("com.slack.api:bolt-servlet:1.18.0")
-    implementation("com.slack.api:bolt-jetty:1.18.0")
-    implementation "com.github.maricn:logback-slack-appender:1.4.0"
-
     //QueryDSL
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
     implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
