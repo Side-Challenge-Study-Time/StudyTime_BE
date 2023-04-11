@@ -81,6 +81,16 @@ public class CouponHistoryService {
         }if (couponHistory.getUsed()) {
             throw new CouponNotAvailableException();
         }
-        couponHistory.setUsed(true);
+        couponHistory.couponUsed(true);
+    }
+    @Transactional
+    public void cancelCouponUsage(Long couponId, Long memberId){
+        LocalDateTime now = LocalDateTime.now();
+        CouponHistory couponHistory = couponHistoryRepository.findByCouponIdAndMemberId(couponId, memberId)
+                .orElseThrow(() -> new NotFoundCoupon(couponId.toString()));
+        if (!couponHistory.getUsed()) {
+            throw new CouponNotAvailableException();
+        }
+        couponHistory.couponUsed(false);
     }
 }

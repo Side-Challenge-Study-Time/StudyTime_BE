@@ -6,7 +6,6 @@ import com.challenge.studytime.global.util.IfLogin;
 import com.challenge.studytime.global.util.LoginUserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,5 +31,10 @@ public class CouponHistoryController {
     @PatchMapping("/use/{couponId}")
     public void useCoupon(@IfLogin LoginUserDto userDto, @PathVariable("couponId") Long couponId){
         couponHistoryService.useCoupon(userDto.getMemberId(), couponId);
+    }
+    @ResponseStatus(HttpStatus.OK)
+    @PatchMapping("/cancel/{couponId}")
+    public void cancelCouponUsage(@IfLogin LoginUserDto userDto, @PathVariable("couponId") Long couponId){
+        couponHistoryService.cancelCouponUsage(userDto.getMemberId(), couponId);
     }
 }

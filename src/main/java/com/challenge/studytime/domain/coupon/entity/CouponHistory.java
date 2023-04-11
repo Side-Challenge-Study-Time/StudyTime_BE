@@ -47,7 +47,7 @@ public class CouponHistory {
         this.uuid = uuid.toString();
     }
 
-    public void setUsed(boolean b) {
+    public void couponUsed(boolean b) {
         this.used = b;
     }
 }
