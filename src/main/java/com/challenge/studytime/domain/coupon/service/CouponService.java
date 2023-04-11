@@ -1,25 +1,16 @@
 package com.challenge.studytime.domain.coupon.service;
 
-import com.challenge.studytime.domain.coupon.dto.request.CouponModifyRequestDto;
-import com.challenge.studytime.domain.coupon.dto.request.CouponRequestDto;
-import com.challenge.studytime.domain.coupon.dto.response.CouponResponseDto;
+import com.challenge.studytime.domain.coupon.dto.CouponRequestDto;
 import com.challenge.studytime.domain.coupon.entity.Coupon;
-import com.challenge.studytime.domain.coupon.repository.CouponHistoryRepository;
 import com.challenge.studytime.domain.coupon.repository.CouponRepository;
-import com.challenge.studytime.global.exception.coupon.CouponNameDuplicationException;
-import com.challenge.studytime.global.exception.coupon.NotFoundCoupon;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class CouponService {
     private final CouponRepository couponRepository;
-    private final CouponHistoryRepository couponHistoryRepository;
 
     @Transactional
     public CouponResponseDto CreateCoupon(CouponRequestDto requestDto){
