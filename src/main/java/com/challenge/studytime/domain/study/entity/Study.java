@@ -2,7 +2,9 @@ package com.challenge.studytime.domain.study.entity;
 
 import com.challenge.studytime.domain.image.entity.ImageData;
 import com.challenge.studytime.domain.member.entity.Member;
+import com.challenge.studytime.domain.comment.entity.Comment;
 import com.challenge.studytime.domain.study.dto.request.StudyModifyRequestDto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,13 +36,20 @@ public class Study {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id")
+    @JsonBackReference
     private Member member;
 
+    @Builder.Default
     @OneToMany(mappedBy = "study", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StudyMember> studyMembers = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "studys", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ImageData> imageDataList = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "study",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<Comment>comments = new ArrayList<>();
 
 
     @Builder.Default
