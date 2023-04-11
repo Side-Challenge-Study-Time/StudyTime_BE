@@ -1,7 +1,8 @@
 package com.challenge.studytime.domain.coupon.controller;
 
-import com.challenge.studytime.domain.coupon.dto.CouponRequestDto;
-import com.challenge.studytime.domain.coupon.entity.Coupon;
+import com.challenge.studytime.domain.coupon.dto.request.CouponModifyRequestDto;
+import com.challenge.studytime.domain.coupon.dto.request.CouponRequestDto;
+import com.challenge.studytime.domain.coupon.dto.response.CouponResponseDto;
 import com.challenge.studytime.domain.coupon.service.CouponService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -8,7 +8,6 @@ import java.util.Optional;
 
 public interface CouponRepository extends JpaRepository<Coupon, Long> {
     boolean existsByCouponName(String couponName);
-
     List<Coupon> findCouponsByCouponName(String couponName);
     Coupon findByCouponName(String couponName);
     void deleteCouponByCouponName(String couponName);

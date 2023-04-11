@@ -1,6 +1,5 @@
 package com.challenge.studytime.domain.coupon.entity;
 
-import com.challenge.studytime.domain.coupon.entity.Coupon;
 import com.challenge.studytime.domain.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,18 +20,34 @@ public class CouponHistory {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "coupon_id")
     private Coupon coupon;
-
+    //proxy -> member값 불러올 때 fetch join
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
-    @Column(nullable = false, length = 10)
+    @Column(name = "coupon_used", length = 10, nullable = false)
     private Boolean used;
-    //연관 관계 메소드 수정
-    @Builder
-//    set말고 명칭 수정
-    public void setCoupon(Member member, Coupon coupon) {
+    @Column(name = "coupon_code",length = 100 , nullable = false)
+    private String uuid;
+    //명시적 이름으로 수정
+    public void setCoupon(Coupon coupon){
         this.coupon = coupon;
-        this.used = false;
+        if (coupon != null && !coupon.getCouponHistories().contains(this)) {
+            coupon.getCouponHistories().add(this);
+        }
+    }
+    public void setMember(Member member){
         this.member = member;
+        if(member != null && !member.getCouponHistories().contains(this)){
+            member.getCouponHistories().add(this);
+        }
+    }
+    @Builder
+    public CouponHistory(UUID uuid) {
+        this.used = false;
+        this.uuid = uuid.toString();
+    }
+
+    public void setUsed(boolean b) {
+        this.used = b;
     }
 }

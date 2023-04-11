@@ -7,12 +7,18 @@ import com.challenge.studytime.domain.coupon.entity.CouponHistory;
 import com.challenge.studytime.domain.coupon.repository.CouponHistoryRepository;
 import com.challenge.studytime.domain.member.entity.Member;
 import com.challenge.studytime.domain.member.repositry.MemberRepositry;
+import com.challenge.studytime.global.exception.coupon.CouponDuplicationException;
+import com.challenge.studytime.global.exception.coupon.CouponNotAvailableException;
+import com.challenge.studytime.global.exception.coupon.NotFoundCoupon;
+import com.challenge.studytime.global.exception.member.NotFoundMemberid;
 import com.challenge.studytime.global.util.LoginUserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -26,43 +32,55 @@ public class CouponHistoryService {
 
     @Transactional
     public CouponHistoryResponseDto createCouponHistory(Long couponId, LoginUserDto userDto) {
-
-        //entity말고 service안에 넣기
         UUID uuid = UUID.randomUUID();
-//orElseThrow 수정 ->로 보이게 그리고 exception 하나 만들어서
-        // valid 유효성 Integer -> int LocalDate -> LocalDateTime Column 길이 제한 Repository어노테이션 노 필요
         Coupon coupon = couponRepository.findById(couponId)
-                .orElseThrow(() -> new EntityNotFoundException());
+                .orElseThrow(() -> new NotFoundCoupon(couponId.toString()));
         Member member = memberRepositry.findById(userDto.getMemberId())
-                .orElseThrow(() -> new EntityNotFoundException());
+                .orElseThrow(() -> new NotFoundMemberid(userDto.getMemberId()));
+        if (coupon.getMaxissuedCount() <= couponHistoryRepository.countByCouponId(userDto.getMemberId())) {
+            throw new CouponDuplicationException();
+        }
+        if (couponHistoryRepository.existsByCouponIdAndMemberId(couponId, userDto.getMemberId())){
+            throw new CouponDuplicationException();
+        }
+        CouponHistory couponHistory = couponHistoryRepository.save(
+                CouponHistory.builder()
+                        .uuid(uuid)
+                        .build());
 
-//        if (coupon.getMaxissuedCount() <= coupon.getIssuedCount()) {
-//            throw new RuntimeException("더 이상 발급 할 수 없습니다.");
-//        }
-//        if (couponHistoryRepository.existsByCoupon_IdAndMember_Id(couponId, userDto.getMemberId())){
-//            throw new RuntimeException("이미 발급한 쿠폰입니다.");
-//        }
-        CouponHistory couponHistory = new CouponHistory();
-        couponHistory.setCoupon(member, coupon);
-
-        coupon.getCouponHistories().add(couponHistory);
-//        coupon.setIssuedCount(coupon.getIssuedCount()); // 발급된 쿠폰 개수 증가
-
-        //연관 관계 메소드로 체크해서 넣어주기
-        couponRepository.save(coupon);
-        memberRepositry.save(member);
+        couponHistory.setCoupon(coupon);
+        couponHistory.setMember(member);
 
         return CouponHistoryResponseDto.doDto(coupon, userDto);
     }
     @Transactional(readOnly = true)
-    public List<CouponHistoryResponseDto> fullSearchCoupon(LoginUserDto userDto) {
-        Coupon coupon = couponRepository.findById(userDto.getMemberId())
-                .orElseThrow(() -> new EntityNotFoundException("Coupon not found with ID: " + userDto.getMemberId()));
+    public List<CouponHistoryResponseDto> SearchUserCoupon(LoginUserDto userDto) {
+        List<CouponHistory> couponHistories = couponHistoryRepository.findAllByMember_Id(userDto.getMemberId());
 
-        List<CouponHistory> couponHistories = couponHistoryRepository.findAllByCoupon(coupon);
+        List<CouponHistoryResponseDto> couponHistoryResponseDtos = new ArrayList<>();
 
-        return couponHistories.stream()
-                .map(couponHistory -> CouponHistoryResponseDto.doDto(couponHistory.getCoupon(), userDto))
-                .collect(Collectors.toList());
+        for (CouponHistory couponHistory : couponHistories){
+            CouponHistoryResponseDto dto = CouponHistoryResponseDto.builder()
+                    .userId(userDto.getMemberId())
+                    .discountValue(couponHistory.getCoupon().getDiscountValue())
+                    .couponName(couponHistory.getCoupon().getCouponName())
+                    .couponId(couponHistory.getCoupon().getId())
+                    .endAt(couponHistory.getCoupon().getEndAt())
+                    .build();
+            couponHistoryResponseDtos.add(dto);
+        }
+        return  couponHistoryResponseDtos;
+    }
+    @Transactional
+    public void useCoupon(Long couponId, Long memberId) {
+        LocalDateTime now = LocalDateTime.now();
+        CouponHistory couponHistory = couponHistoryRepository.findByCouponIdAndMemberId(couponId, memberId)
+                .orElseThrow(() -> new NotFoundCoupon(couponId.toString()));
+        if (couponHistory.getCoupon().getEndAt().isBefore(now)){
+            throw new CouponNotAvailableException();
+        }if (couponHistory.getUsed()) {
+            throw new CouponNotAvailableException();
+        }
+        couponHistory.setUsed(true);
     }
 }

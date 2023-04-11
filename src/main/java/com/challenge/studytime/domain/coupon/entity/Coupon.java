@@ -28,10 +28,10 @@ public class Coupon {
     private int discountValue;
     @Column(name = "max_value", length = 10 , nullable = false)
     private int maxissuedCount;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     @Column(name = "start_time", length = 45, nullable = false)
     private LocalDateTime assignedAt;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     @Column(name = "end_time", length = 45,nullable = false)
     private LocalDateTime endAt;
 

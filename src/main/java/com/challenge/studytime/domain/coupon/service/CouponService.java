@@ -1,11 +1,18 @@
 package com.challenge.studytime.domain.coupon.service;
 
-import com.challenge.studytime.domain.coupon.dto.CouponRequestDto;
+import com.challenge.studytime.domain.coupon.dto.request.CouponModifyRequestDto;
+import com.challenge.studytime.domain.coupon.dto.request.CouponRequestDto;
+import com.challenge.studytime.domain.coupon.dto.response.CouponResponseDto;
 import com.challenge.studytime.domain.coupon.entity.Coupon;
 import com.challenge.studytime.domain.coupon.repository.CouponRepository;
+import com.challenge.studytime.global.exception.coupon.CouponNameDuplicationException;
+import com.challenge.studytime.global.exception.coupon.NotFoundCoupon;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -61,10 +68,6 @@ public class CouponService {
         }
         Coupon coupon = couponRepository.findByCouponName(couponModifyRequestDto.getCouponName());
         coupon.modifyTime(couponModifyRequestDto.getTime());
-        /**
-         * couponRepository.save(coupon);
-         * update coupon set start_time=?, coupon_name=?, discount_value=?, end_time=?, max_value=? where coupon_id=? 쿼리 발생
-         */
         return couponModifyRequestDto.getCouponName();
     }
     @Transactional

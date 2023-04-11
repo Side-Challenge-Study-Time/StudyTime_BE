@@ -5,8 +5,11 @@ import com.challenge.studytime.domain.coupon.service.CouponHistoryService;
 import com.challenge.studytime.global.util.IfLogin;
 import com.challenge.studytime.global.util.LoginUserDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -14,13 +17,20 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class CouponHistoryController {
     private final CouponHistoryService couponHistoryService;
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{couponId}")
-    public ResponseEntity<CouponHistoryResponseDto> createCouponHistory(@PathVariable("couponId") Long couponId, @IfLogin LoginUserDto userDto) {
+    public CouponHistoryResponseDto createCouponHistory(@PathVariable("couponId") Long couponId, @IfLogin LoginUserDto userDto) {
         CouponHistoryResponseDto couponHistoryResponseDto = couponHistoryService.createCouponHistory(couponId, userDto);
-        return ResponseEntity.ok(couponHistoryResponseDto);
+        return couponHistoryResponseDto;
     }
-    @GetMapping("/search")
-    public ResponseEntity fullSearchCoupon(@IfLogin LoginUserDto userDto){
-        return ResponseEntity.ok(couponHistoryService.fullSearchCoupon(userDto));
+    @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping("/user-search")
+    public List<CouponHistoryResponseDto> SearchCoupon(@IfLogin LoginUserDto userDto){
+        return couponHistoryService.SearchUserCoupon(userDto);
+    }
+    @ResponseStatus(HttpStatus.OK)
+    @PatchMapping("/use/{couponId}")
+    public void useCoupon(@IfLogin LoginUserDto userDto, @PathVariable("couponId") Long couponId){
+        couponHistoryService.useCoupon(userDto.getMemberId(), couponId);
     }
 }
