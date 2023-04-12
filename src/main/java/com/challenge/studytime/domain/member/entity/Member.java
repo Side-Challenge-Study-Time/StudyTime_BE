@@ -3,6 +3,7 @@ package com.challenge.studytime.domain.member.entity;
 import com.challenge.studytime.domain.coupon.entity.CouponHistory;
 import com.challenge.studytime.domain.role.entity.Role;
 import com.challenge.studytime.domain.study.entity.Study;
+import com.challenge.studytime.domain.study.entity.StudyMember;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,8 +41,10 @@ public class Member {
     @OneToMany(mappedBy ="member" ,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     List<Study>studyList = new ArrayList<>();
 
+
     @OneToMany(mappedBy = "coupon", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CouponHistory> couponHistories = new ArrayList<>();
+
 
     @Builder.Default
     @ManyToMany
