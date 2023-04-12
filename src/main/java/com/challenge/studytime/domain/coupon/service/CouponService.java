@@ -20,7 +20,7 @@ public class CouponService {
     private final CouponRepository couponRepository;
 
     @Transactional
-    public CouponResponseDto CreateCoupon(CouponRequestDto requestDto){
+    public CouponResponseDto registerCoupon(CouponRequestDto requestDto){
         if (couponRepository.existsByCouponName(requestDto.getCouponName())) {
             throw new CouponNameDuplicationException(requestDto.getCouponName());
         }
@@ -49,7 +49,7 @@ public class CouponService {
     }
 
     @Transactional(readOnly = true)
-    public List<CouponResponseDto> searchCoupon(String couponName){
+    public List<CouponResponseDto> detailCoupon(String couponName){
         if (!couponRepository.existsByCouponName(couponName)){
             throw new NotFoundCoupon("Not Found Coupon");
         }

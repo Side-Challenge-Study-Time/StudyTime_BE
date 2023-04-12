@@ -8,6 +8,8 @@ import com.challenge.studytime.global.exception.coupon.NotFoundCoupon;
 import com.challenge.studytime.global.exception.member.NotMatchPassword;
 import com.challenge.studytime.global.exception.member.UserEmailDuplicationException;
 import com.challenge.studytime.global.exception.refreshToken.NotFoundRefreshToken;
+import com.challenge.studytime.global.exception.studyroom.NotFoundStudyRoom;
+import com.challenge.studytime.global.exception.studyroom.NotillegalException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -67,4 +69,16 @@ public class ControllerErrorAdvice {
         return new ErrorResponse("400", "Not available coupon");
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NotFoundStudyRoom.class)
+    public ErrorResponse NotFoundStudyRoom(){
+        log.error("Not Found StudyRoom");
+        return new ErrorResponse("400", "Not Found StudyRoom");
+    }
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NotillegalException.class)
+    public ErrorResponse NotillegalException(){
+        log.error("Not Valid value");
+        return new ErrorResponse("400", "Not Valid value");
+    }
 }

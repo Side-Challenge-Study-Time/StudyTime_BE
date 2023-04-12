@@ -17,17 +17,17 @@ import java.util.List;
 public class CouponController {
     private final CouponService couponService;
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/create")
-    public CouponResponseDto createCoupon(@RequestBody @Valid CouponRequestDto requestDto){
-        return couponService.CreateCoupon(requestDto);
+    @PostMapping("/register")
+    public CouponResponseDto registerCoupon(@RequestBody @Valid CouponRequestDto requestDto){
+        return couponService.registerCoupon(requestDto);
     }
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/search")
-    public List<CouponResponseDto> searchCoupon(@RequestBody @Valid CouponRequestDto requestDto){
-        return couponService.searchCoupon(requestDto.getCouponName());
+    public List<CouponResponseDto> detailCoupon(@RequestBody @Valid CouponRequestDto requestDto){
+        return couponService.detailCoupon(requestDto.getCouponName());
     }
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/search/all")
+    @GetMapping("/fullSearch")
     public List<CouponResponseDto> fullSearchCoupon(){
         return couponService.fullSearchCoupon();
     }
@@ -37,7 +37,7 @@ public class CouponController {
        return couponService.modifyCoupon(couponModifyRequestDto);
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/nocontent")
+    @DeleteMapping("/noContent")
     public void deleteByCoupon(@RequestBody @Valid CouponModifyRequestDto couponModifyRequestDto){
         couponService.deleteByCoupon(couponModifyRequestDto.getCouponName());
     }
