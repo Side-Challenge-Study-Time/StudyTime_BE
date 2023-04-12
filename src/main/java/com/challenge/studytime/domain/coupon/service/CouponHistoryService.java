@@ -30,7 +30,7 @@ public class CouponHistoryService {
     private final MemberRepositry memberRepositry;
 
     @Transactional
-    public CouponHistoryResponseDto createCouponHistory(Long couponId, LoginUserDto userDto) {
+    public CouponHistoryResponseDto registerCouponHistory(Long couponId, LoginUserDto userDto) {
         UUID uuid = UUID.randomUUID();
         Coupon coupon = couponRepository.findById(couponId)
                 .orElseThrow(() -> new NotFoundCoupon(couponId.toString()));
@@ -53,7 +53,7 @@ public class CouponHistoryService {
         return CouponHistoryResponseDto.doDto(coupon, userDto);
     }
     @Transactional(readOnly = true)
-    public List<CouponHistoryResponseDto> SearchUserCoupon(LoginUserDto userDto) {
+    public List<CouponHistoryResponseDto> detailUserCoupon(LoginUserDto userDto) {
         List<CouponHistory> couponHistories = couponHistoryRepository.findAllByMember_Id(userDto.getMemberId());
 
         List<CouponHistoryResponseDto> couponHistoryResponseDtos = new ArrayList<>();
