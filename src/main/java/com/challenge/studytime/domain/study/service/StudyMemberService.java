@@ -32,11 +32,9 @@ public class StudyMemberService {
 
         preventionDuplicateStudyParticipation(studyId, userDto);
 
-        // StudyId로 Study 엔티티를 찾아옵니다.
         Study study = studyRepository.findByIdAndDeleteStudyFalse(studyId)
                 .orElseThrow(() -> new NotFoundStudyWithId(studyId));
 
-        // MemberId로 Member 엔티티를 찾아옵니다.
         Member member = memberRepositry.findById(userDto.getMemberId())
                 .orElseThrow(() -> new NotFoundMemberid(userDto.getMemberId()));
 
@@ -48,13 +46,11 @@ public class StudyMemberService {
         }
 
 
-        // StudyMember 객체를 생성하고 연관 관계를 설정합니다.
         StudyMember studyMemberS = StudyMember.builder()
                 .study(study)
                 .member(member)
                 .build();
 
-        // StudyMember를 저장합니다.
         studyMemberRepository.save(studyMemberS);
     }
 
