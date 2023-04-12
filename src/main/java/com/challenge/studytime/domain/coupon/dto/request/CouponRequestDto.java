@@ -13,12 +13,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CouponRequestDto {
-    @NotNull
+    @NotNull(message = "Coupon name is empty")
     private String couponName;
-    @NotNull
+    @NotNull(message = "discountValue is empty")
     private int discountValue;
-    @NotNull
+    @NotNull(message = "maxValue is empty")
     private int maxissuedCount;
-    @NotNull
+    @NotNull(message = "endTime is empty")
     private LocalDateTime endAt;
 }
