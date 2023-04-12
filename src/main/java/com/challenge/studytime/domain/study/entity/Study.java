@@ -48,8 +48,8 @@ public class Study {
     private List<ImageData> imageDataList = new ArrayList<>();
 
     @Builder.Default
-    @OneToMany(mappedBy = "study",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private List<Comment>comments = new ArrayList<>();
+    @OneToMany(mappedBy = "study", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
 
 
     @Builder.Default
@@ -58,7 +58,6 @@ public class Study {
     public void changeStudy() {
         deleteStudy = true;
     }
-
 
 
     public void decreaseMembersCount() {
@@ -72,7 +71,6 @@ public class Study {
 
     }
 
-    //연관관계 편의 메소드
     public void addMemberWithStudy(Member member) {
         this.member = member;
         member.getStudyList().add(this);
