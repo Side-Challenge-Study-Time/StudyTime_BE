@@ -20,7 +20,6 @@ public class CouponHistory {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "coupon_id")
     private Coupon coupon;
-    //proxy -> member값 불러올 때 fetch join
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -28,14 +27,13 @@ public class CouponHistory {
     private Boolean used;
     @Column(name = "coupon_code",length = 100 , nullable = false)
     private String uuid;
-    //명시적 이름으로 수정
-    public void setCoupon(Coupon coupon){
+    public void setCouponFromCouponHistory(Coupon coupon){
         this.coupon = coupon;
         if (coupon != null && !coupon.getCouponHistories().contains(this)) {
             coupon.getCouponHistories().add(this);
         }
     }
-    public void setMember(Member member){
+    public void setMemberFromCouponHistory(Member member){
         this.member = member;
         if(member != null && !member.getCouponHistories().contains(this)){
             member.getCouponHistories().add(this);

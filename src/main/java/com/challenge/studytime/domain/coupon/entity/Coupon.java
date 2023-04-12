@@ -1,6 +1,5 @@
 package com.challenge.studytime.domain.coupon.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,10 +27,8 @@ public class Coupon {
     private int discountValue;
     @Column(name = "max_value", length = 10 , nullable = false)
     private int maxissuedCount;
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     @Column(name = "start_time", length = 45, nullable = false)
     private LocalDateTime assignedAt;
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     @Column(name = "end_time", length = 45,nullable = false)
     private LocalDateTime endAt;
 

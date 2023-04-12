@@ -1,8 +1,6 @@
 package com.challenge.studytime.domain.coupon.dto.response;
 
-import java.util.UUID;
 import com.challenge.studytime.domain.coupon.entity.Coupon;
-import com.challenge.studytime.global.util.IfLogin;
 import com.challenge.studytime.global.util.LoginUserDto;
 import lombok.*;
 
@@ -18,7 +16,7 @@ public class CouponHistoryResponseDto {
     private Long couponId;
     private Long userId;
     private LocalDateTime endAt;
-    public static CouponHistoryResponseDto doDto(Coupon coupon, @IfLogin LoginUserDto userDto){
+    public static CouponHistoryResponseDto doDto(Coupon coupon, LoginUserDto userDto){
         return CouponHistoryResponseDto.builder()
                 .discountValue(coupon.getDiscountValue())
                 .couponName(coupon.getCouponName())
