@@ -1,21 +1,25 @@
-package com.challenge.studytime.domain.couponhistory.dto;
+package com.challenge.studytime.domain.coupon.dto.response;
 
 import com.challenge.studytime.domain.coupon.entity.Coupon;
-import com.challenge.studytime.global.util.IfLogin;
 import com.challenge.studytime.global.util.LoginUserDto;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 public class CouponHistoryResponseDto {
+    private int discountValue;
+    private String couponName;
     private Long couponId;
     private Long userId;
-    private LocalDate endAt;
-    public static CouponHistoryResponseDto doDto(Coupon coupon, @IfLogin LoginUserDto userDto){
+    private LocalDateTime endAt;
+    public static CouponHistoryResponseDto doDto(Coupon coupon, LoginUserDto userDto){
         return CouponHistoryResponseDto.builder()
+                .discountValue(coupon.getDiscountValue())
+                .couponName(coupon.getCouponName())
                 .couponId(coupon.getId())
                 .userId(userDto.getMemberId())
                 .endAt(coupon.getEndAt())

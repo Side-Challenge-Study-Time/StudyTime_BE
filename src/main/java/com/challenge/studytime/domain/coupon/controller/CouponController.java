@@ -3,38 +3,41 @@ package com.challenge.studytime.domain.coupon.controller;
 import com.challenge.studytime.domain.coupon.dto.request.CouponModifyRequestDto;
 import com.challenge.studytime.domain.coupon.dto.request.CouponRequestDto;
 import com.challenge.studytime.domain.coupon.dto.response.CouponResponseDto;
-import com.challenge.studytime.domain.coupon.entity.Coupon;
 import com.challenge.studytime.domain.coupon.service.CouponService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/coupon")
+@RequestMapping("/api/coupons")
 @RequiredArgsConstructor
 public class CouponController {
     private final CouponService couponService;
-    @PostMapping("/api/coupons")
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/create")
     public CouponResponseDto createCoupon(@RequestBody @Valid CouponRequestDto requestDto){
         return couponService.CreateCoupon(requestDto);
     }
-    @GetMapping("/search-coupon")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/search")
     public List<CouponResponseDto> searchCoupon(@RequestBody @Valid CouponRequestDto requestDto){
         return couponService.searchCoupon(requestDto.getCouponName());
     }
-    @GetMapping("/fullsearch-coupon")
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/search/all")
     public List<CouponResponseDto> fullSearchCoupon(){
         return couponService.fullSearchCoupon();
     }
-    @PatchMapping("/modify-coupon")
+    @ResponseStatus(HttpStatus.CREATED)
+    @PatchMapping("/modify")
     public String modifyCoupon(@RequestBody @Valid CouponModifyRequestDto couponModifyRequestDto){
        return couponService.modifyCoupon(couponModifyRequestDto);
     }
-    @DeleteMapping("/delete")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/nocontent")
     public void deleteByCoupon(@RequestBody @Valid CouponModifyRequestDto couponModifyRequestDto){
         couponService.deleteByCoupon(couponModifyRequestDto.getCouponName());
     }

@@ -1,7 +1,9 @@
 package com.challenge.studytime.global.exception.controller;
 
 import com.challenge.studytime.global.exception.ErrorResponse;
+import com.challenge.studytime.global.exception.coupon.CouponDuplicationException;
 import com.challenge.studytime.global.exception.coupon.CouponNameDuplicationException;
+import com.challenge.studytime.global.exception.coupon.CouponNotAvailableException;
 import com.challenge.studytime.global.exception.coupon.NotFoundCoupon;
 import com.challenge.studytime.global.exception.member.NotMatchPassword;
 import com.challenge.studytime.global.exception.member.UserEmailDuplicationException;
@@ -31,8 +33,6 @@ public class ControllerErrorAdvice {
         return new ErrorResponse("400", "user not found member");
     }
 
-
-
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(NotMatchPassword.class)
     public ErrorResponse NotMatchPassword() {
@@ -52,6 +52,19 @@ public class ControllerErrorAdvice {
     public ErrorResponse NotFoundCoupon() {
         log.error("NOT Found COUPON ");
         return new ErrorResponse("400", "Not Found Coupon");
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(CouponDuplicationException.class)
+    public ErrorResponse CouponDuplicationException(){
+        log.error("Cannot issue coupon");
+        return new ErrorResponse("400", "Cannot issue coupon");
+    }
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(CouponNotAvailableException.class)
+    public ErrorResponse CouponNotAvailableException(){
+        log.error("Not available coupon");
+        return new ErrorResponse("400", "Not available coupon");
     }
 
 }

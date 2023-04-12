@@ -1,11 +1,9 @@
-package com.challenge.studytime.domain.couponhistory.dto;
+package com.challenge.studytime.domain.coupon.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.UUID;
 
 @Getter
 @Setter

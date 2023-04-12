@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-// Data 없으니 406번 에러 뜸
 @Data
 public class CouponResponseDto {
     private Long id;

@@ -4,7 +4,6 @@ import com.challenge.studytime.domain.coupon.dto.request.CouponModifyRequestDto;
 import com.challenge.studytime.domain.coupon.dto.request.CouponRequestDto;
 import com.challenge.studytime.domain.coupon.dto.response.CouponResponseDto;
 import com.challenge.studytime.domain.coupon.entity.Coupon;
-import com.challenge.studytime.domain.coupon.repository.CouponHistoryRepository;
 import com.challenge.studytime.domain.coupon.repository.CouponRepository;
 import com.challenge.studytime.global.exception.coupon.CouponNameDuplicationException;
 import com.challenge.studytime.global.exception.coupon.NotFoundCoupon;
@@ -19,7 +18,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CouponService {
     private final CouponRepository couponRepository;
-    private final CouponHistoryRepository couponHistoryRepository;
 
     @Transactional
     public CouponResponseDto CreateCoupon(CouponRequestDto requestDto){
@@ -34,14 +32,9 @@ public class CouponService {
                 .build());
         return CouponResponseDto.toDto(coupon);
     }
-    @Transactional(readOnly = true)
-    public List<CouponResponseDto> searchCoupon(String couponName){
-        if (!couponRepository.existsByCouponName(couponName)){
-            throw new NotFoundCoupon("Not Found Coupon");
-        }
-        List<Coupon> coupons = couponRepository.findCouponsByCouponName(couponName);
+    public List<CouponResponseDto> convertToDtoList(List<Coupon> coupons) {
         List<CouponResponseDto> couponResponseDtos = new ArrayList<>();
-        for (Coupon coupon : coupons){
+        for (Coupon coupon : coupons) {
             CouponResponseDto couponResponseDto = CouponResponseDto.builder()
                     .id(coupon.getId())
                     .couponName(coupon.getCouponName())
@@ -54,22 +47,19 @@ public class CouponService {
         }
         return couponResponseDtos;
     }
+
+    @Transactional(readOnly = true)
+    public List<CouponResponseDto> searchCoupon(String couponName){
+        if (!couponRepository.existsByCouponName(couponName)){
+            throw new NotFoundCoupon("Not Found Coupon");
+        }
+        List<Coupon> coupons = couponRepository.findCouponsByCouponName(couponName);
+        return convertToDtoList(coupons);
+    }
     @Transactional(readOnly = true)
     public List<CouponResponseDto> fullSearchCoupon(){
         List<Coupon> coupons = couponRepository.findAll();
-        List<CouponResponseDto> couponResponseDtos = new ArrayList<>();
-        for (Coupon coupon : coupons){
-            CouponResponseDto couponResponseDto = CouponResponseDto.builder()
-                    .id(coupon.getId())
-                    .couponName(coupon.getCouponName())
-                    .assignedAt(coupon.getAssignedAt())
-                    .discountValue(coupon.getDiscountValue())
-                    .maxissuedCount(coupon.getMaxissuedCount())
-                    .endAt(coupon.getEndAt())
-                    .build();
-            couponResponseDtos.add(couponResponseDto);
-        }
-        return couponResponseDtos;
+        return convertToDtoList(coupons);
     }
     @Transactional
     public String modifyCoupon(CouponModifyRequestDto couponModifyRequestDto){
@@ -78,10 +68,6 @@ public class CouponService {
         }
         Coupon coupon = couponRepository.findByCouponName(couponModifyRequestDto.getCouponName());
         coupon.modifyTime(couponModifyRequestDto.getTime());
-        /**
-         * couponRepository.save(coupon);
-         * update coupon set start_time=?, coupon_name=?, discount_value=?, end_time=?, max_value=? where coupon_id=? 쿼리 발생
-         */
         return couponModifyRequestDto.getCouponName();
     }
     @Transactional
