@@ -17,15 +17,15 @@ import java.util.List;
 public class CouponHistoryController {
     private final CouponHistoryService couponHistoryService;
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/create/{couponId}")
-    public CouponHistoryResponseDto createCouponHistory(@PathVariable("couponId") Long couponId, @IfLogin LoginUserDto userDto) {
-        CouponHistoryResponseDto couponHistoryResponseDto = couponHistoryService.createCouponHistory(couponId, userDto);
+    @PostMapping("/register/{couponId}")
+    public CouponHistoryResponseDto registerCouponHistory(@PathVariable("couponId") Long couponId, @IfLogin LoginUserDto userDto) {
+        CouponHistoryResponseDto couponHistoryResponseDto = couponHistoryService.registerCouponHistory(couponId, userDto);
         return couponHistoryResponseDto;
     }
     @ResponseStatus(HttpStatus.CREATED)
     @GetMapping("/search/user")
     public List<CouponHistoryResponseDto> SearchCoupon(@IfLogin LoginUserDto userDto){
-        return couponHistoryService.SearchUserCoupon(userDto);
+        return couponHistoryService.detailUserCoupon(userDto);
     }
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping("/use/{couponId}")

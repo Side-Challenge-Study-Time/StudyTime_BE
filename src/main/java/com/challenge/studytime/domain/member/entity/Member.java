@@ -5,6 +5,7 @@ import com.challenge.studytime.domain.comment.entity.Comment;
 import com.challenge.studytime.domain.role.entity.Role;
 import com.challenge.studytime.domain.study.entity.Study;
 import com.challenge.studytime.domain.study.entity.StudyMember;
+import com.challenge.studytime.domain.studyroom.entity.StudyRoom;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,15 +46,18 @@ public class Member {
     @OneToMany(mappedBy ="member" ,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     List<Study>studyList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<StudyMember> studyMembers = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StudyMember> studyMembers = new ArrayList<>();
-
-
-    @OneToMany(mappedBy = "coupon", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CouponHistory> couponHistories = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<StudyRoom> studyRooms = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "member",fetch = FetchType.LAZY,cascade = CascadeType.ALL)

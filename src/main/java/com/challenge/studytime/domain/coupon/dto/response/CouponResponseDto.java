@@ -6,13 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class CouponResponseDto {
     private Long id;
     private String couponName;
@@ -20,7 +19,6 @@ public class CouponResponseDto {
     private int maxissuedCount;
     private LocalDateTime assignedAt;
     private LocalDateTime endAt;
-    @Builder
     public static CouponResponseDto toDto(Coupon coupon){
         return CouponResponseDto.builder()
                 .id(coupon.getId())
