@@ -6,14 +6,16 @@
 </p>
 
 ### 프로젝트 소개
+> 모두를 위한 스터디 예약, 스터디 타임!• <b>백엔드</b> 레포지토리
+
+## 🔍 개발 과정
+- [무건 : Spring Security & JWT](https://pos04167.tistory.com)
+- [무건 : 동시성 이슈](https://pos04167.tistory.com/177)
+- [무건 : QueryDSL Read 성능 최적화](https://pos04167.tistory.com/178)
+- [무건 : Refresh Token Redis로 저장하기](https://pos04167.tistory.com)
+- [무건 : Data JPA N+1 이슈 해결하기](https://pos04167.tistory.com)
 
 
-
-
-### 프로젝트 기간
-- 기획 및 설계
-- 프로젝트 구현
-- 버그 수정 및 리팩토링
 
 ### 팀원소개
 <table>
@@ -35,25 +37,47 @@
 ```bash
 src
 ├── global 
-│   ├── exception
+│   ├── exception # 도메인별 에러 정의
 │   ├── config
-│   ├── interceptor
-│   └── jwt
-│  
-└── domain
-    ├── 
-    ├── 
-    └── 
- 
+│   ├── redis
+│   ├── util
+│   ├── initializer
+│   └── jwt 
+│ 
+└── Domain   
+       └── domains 
+           └── <도메인>  # 각도메인 ex : order ,ticket
+             └── controller # 도메인 컨트롤러
+             └── domain # 도메인 오브젝트
+             └── repostiory # 도메인 리포지토리
+             └── service # 도메인 서비스, 도메인 이벤트 핸들러
 ```
 
 # 👨‍🔧기술 스택
-- Java11, Spring Boot2.7.10, Spring Security
-- Spring Data JPA
-- MySQL 8.0, JUnit5, Mockito
-- Gradle 7.5
-- GitHub, Git, SLACK, Notion
-- Amazon AWS
+<div align="left">
+<div>
+<img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat-square&logo=Spring Boot&logoColor=white">
+<img src="https://img.shields.io/badge/Gradle-02303A?style=flat-square&logo=Gradle&logoColor=white">
+</div>
+
+<div>
+<img src="https://img.shields.io/badge/MySQL-4479A1.svg?style=flat-square&logo=MySQL&logoColor=white">
+<img src="https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=Redis&logoColor=white">
+</div>
+
+<div>
+<img src="https://img.shields.io/badge/Amazon AWS-232F3E?style=flat-square&logo=Amazon AWS&logoColor=white">
+<img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white">
+<img src="https://img.shields.io/badge/JSON Web Tokens-000000?style=flat-square&logo=JSON Web Tokens&logoColor=white">
+</div>
+
+<div>
+<img src="https://img.shields.io/badge/JUnit5-#25A162?style=flat-square&logo=SonarCloud&logoColor=white">
+<img src="https://img.shields.io/badge/Mockito-##8D6748?style=flat-square&logo=Amazon CloudWatch&logoColor=white">
+<img src="https://img.shields.io/badge/Slack-4A154B?style=flat-square&logo=slack&logoColor=white">
+</div>
+
+</div>
 
 
 # 🐌Git Commit Convention
