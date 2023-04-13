@@ -5,12 +5,13 @@
 <img src="https://user-images.githubusercontent.com/103854287/229304023-5cd76539-1c4a-450d-a79e-4d8b814c46c8.png" style="width: 50%; height: 40%;" />
 </p>
 
+
 ## 🎉프로젝트 소개
 > 모두를 위한 스터디 예약, 스터디 타임!• <b>백엔드</b> 레포지토리
 
 <br>
 
-## 😀팀원소개
+### 팀원소개
 <table>
   <tr>
     <td>
