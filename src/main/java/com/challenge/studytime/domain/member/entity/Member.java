@@ -2,6 +2,7 @@ package com.challenge.studytime.domain.member.entity;
 
 
 import com.challenge.studytime.domain.comment.entity.Comment;
+import com.challenge.studytime.domain.coupon.entity.CouponHistory;
 import com.challenge.studytime.domain.role.entity.Role;
 import com.challenge.studytime.domain.study.entity.Study;
 import com.challenge.studytime.domain.study.entity.StudyMember;
@@ -45,9 +46,6 @@ public class Member {
     @JsonManagedReference
     @OneToMany(mappedBy ="member" ,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     List<Study>studyList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<StudyMember> studyMembers = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
