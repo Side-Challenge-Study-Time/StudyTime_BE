@@ -5,19 +5,11 @@
 <img src="https://user-images.githubusercontent.com/103854287/229304023-5cd76539-1c4a-450d-a79e-4d8b814c46c8.png" style="width: 50%; height: 40%;" />
 </p>
 
-### 프로젝트 소개
+## 프로젝트 소개
 > 모두를 위한 스터디 예약, 스터디 타임!• <b>백엔드</b> 레포지토리
 
-## 🔍 개발 과정
-- [무건 : Spring Security & JWT](https://pos04167.tistory.com)
-- [무건 : 동시성 이슈](https://pos04167.tistory.com/177)
-- [무건 : QueryDSL Read 성능 최적화](https://pos04167.tistory.com/178)
-- [무건 : Refresh Token Redis로 저장하기](https://pos04167.tistory.com)
-- [무건 : Data JPA N+1 이슈 해결하기](https://pos04167.tistory.com)
 
-
-
-### 팀원소개
+## 팀원소개
 <table>
   <tr>
     <td>
@@ -32,6 +24,15 @@
     <td><b>이광민</b></td>
   </tr>
 </table>
+
+## 🔍 개발 과정
+- [무건 : Spring Security & JWT](https://pos04167.tistory.com)
+- [무건 : 동시성 이슈](https://pos04167.tistory.com/177)
+- [무건 : QueryDSL Read 성능 최적화](https://pos04167.tistory.com/178)
+- [무건 : Refresh Token Redis로 저장하기](https://pos04167.tistory.com)
+- [무건 : Data JPA N+1 이슈 해결하기](https://pos04167.tistory.com)
+
+
 
 ### 프로젝트 구조도
 ```bash
@@ -72,8 +73,8 @@ src
 </div>
 
 <div>
-<img src="https://img.shields.io/badge/JUnit5-#25A162?style=flat-square&logo=SonarCloud&logoColor=white">
-<img src="https://img.shields.io/badge/Mockito-##8D6748?style=flat-square&logo=Amazon CloudWatch&logoColor=white">
+<img src="https://img.shields.io/badge/JUnit5-F3702A?style=flat-square&logo=#25A162&logoColor=white">
+<img src="https://img.shields.io/badge/Mockito-FF4F8B?style=flat-square&logo=Amazon CloudWatch&logoColor=white">
 <img src="https://img.shields.io/badge/Slack-4A154B?style=flat-square&logo=slack&logoColor=white">
 </div>
 
