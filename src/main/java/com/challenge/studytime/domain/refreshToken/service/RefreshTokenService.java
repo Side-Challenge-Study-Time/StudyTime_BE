@@ -9,6 +9,7 @@ import com.challenge.studytime.domain.refreshToken.repository.RefreshTokenReposi
 import com.challenge.studytime.global.exception.member.NotFoundMemberEmail;
 import com.challenge.studytime.global.exception.member.NotFoundMemberid;
 import com.challenge.studytime.global.jwt.util.JwtTokenizer;
+import com.challenge.studytime.global.redis.RedisService;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,22 +23,22 @@ public class RefreshTokenService {
     private final RefreshTokenRepositry refreshTokenRepository;
     private final JwtTokenizer jwtTokenizer;
     private final MemberRepositry memberRepository;
+    private final RedisService redisService;
 
     @Transactional
-    public RefreshToken addRefreshToken(String refreshToken, Member member) {
+    public void addRefreshToken(String refreshToken, Member member) {
 
         RefreshToken token = RefreshToken.builder()
                 .value(refreshToken)
                 .memberId(member.getId())
                 .build();
 
-        return refreshTokenRepository.save(token);
+        redisService.setValues(refreshToken);
     }
 
     @Transactional
     public void deleteRefreshToken(String refreshToken) {
-        refreshTokenRepository.findByValue(refreshToken)
-                .ifPresent(refreshTokenRepository::delete);
+        redisService.delValues(refreshToken);
     }
 
     @Transactional(readOnly = true)
