@@ -23,14 +23,3 @@ public class StudyResponseDto {
                 .build();
     }
 }
-/*
-    public static MemberSignupResponseDto toDto(Member member) {
-        return MemberSignupResponseDto.builder()
-                .memberId(member.getId())
-                .email(member.getEmail())
-                .name(member.getName())
-                .birthday(member.getBirthday())
-                .regdate(LocalDateTime.now())
-                .build();
-    }
- */
