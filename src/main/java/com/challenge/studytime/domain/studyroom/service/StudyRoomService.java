@@ -23,16 +23,16 @@ import java.util.List;
 public class StudyRoomService {
     private final MemberRepositry memberRepositry;
     private final StudyRoomRepository studyRoomRepository;
-
+    private void validateRequestDto(StudyRoomRequestDto requestDto) {
+        if (requestDto.getPrice() <= 0 || requestDto.getCapacity() <= 0) {
+            throw new NotillegalException();
+        }
+    }
     @Transactional
     public StudyRoomResponseDto registerStudyRoom(LoginUserDto userDto, StudyRoomRequestDto requestDto){
         Member member = memberRepositry.findById(userDto.getMemberId())
                 .orElseThrow(() -> new NotFoundMemberid(userDto.getMemberId()));
-        if (requestDto.getPrice() <= 0){
-            throw new NotillegalException();
-        }if (requestDto.getCapacity() <= 0){
-            throw new NotillegalException();
-        }
+        validateRequestDto(requestDto);
         StudyRoom studyRoom = studyRoomRepository.save(StudyRoom.builder()
                 .price(requestDto.getPrice())
                 .capacity(requestDto.getCapacity())
@@ -60,8 +60,10 @@ public class StudyRoomService {
     }
     @Transactional(readOnly = true)
     public List<StudyRoomResponseDto> detailStudyRoom(Long roomId){
-        List<StudyRoom> studyRooms = (List<StudyRoom>) studyRoomRepository.findById(roomId)
-                .orElseThrow(() -> new NotFoundStudyRoom());
+        List<StudyRoom> studyRooms = studyRoomRepository.findAllById(roomId);
+        if (studyRooms.isEmpty()){
+            throw new NotFoundStudyRoom();
+        }
         return convertToDtoList(studyRooms);
     }
     @Transactional(readOnly = true)

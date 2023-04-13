@@ -1,23 +1,21 @@
 package com.challenge.studytime.domain.studyroom.dto.request;
-
-
 import lombok.*;
 
-import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudyRoomRequestDto {
-    @Column(nullable = false)
+    @NotNull
     private int price;
-    @Column(nullable = false)
+    @NotNull
     private int capacity;
-    @Column(nullable = false)
+    @NotNull
     private String name;
-    @Column(nullable = false)
+    @NotNull
     private String location;
-    @Column(nullable = false)
+    @NotNull
     private String description;
 }
