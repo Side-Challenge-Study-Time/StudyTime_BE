@@ -2,7 +2,7 @@ package com.challenge.studytime.domain.refreshToken.service;
 
 import com.challenge.studytime.domain.member.dto.response.MemberLoginResponseDto;
 import com.challenge.studytime.domain.member.entity.Member;
-import com.challenge.studytime.domain.member.repositry.MemberRepositry;
+import com.challenge.studytime.domain.member.repositry.MemberRepository;
 import com.challenge.studytime.domain.refreshToken.dto.request.RefreshTokenDto;
 import com.challenge.studytime.domain.refreshToken.entity.RefreshToken;
 import com.challenge.studytime.domain.refreshToken.repository.RefreshTokenRepositry;
@@ -22,7 +22,7 @@ import java.util.List;
 public class RefreshTokenService {
     private final RefreshTokenRepositry refreshTokenRepository;
     private final JwtTokenizer jwtTokenizer;
-    private final MemberRepositry memberRepository;
+    private final MemberRepository memberRepository;
     private final RedisService redisService;
 
     @Transactional

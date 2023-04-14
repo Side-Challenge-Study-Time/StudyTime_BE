@@ -30,7 +30,7 @@ public class CommentController {
             @IfLogin LoginUserDto userDto,
             @PathVariable Long studyId
     ) {
-        return commentService.createParentComment(content,userDto,studyId);
+        return commentService.createParentComment(content, userDto, studyId);
     }
 
     @PostMapping("/reply/{parentId}")
@@ -40,7 +40,7 @@ public class CommentController {
             @RequestBody String content,
             @IfLogin LoginUserDto userDto
     ) {
-        return commentService.createReplyComment(parentId, content,userDto);
+        return commentService.createReplyComment(parentId, content, userDto);
     }
 
     @GetMapping("/fullSrchReply")
@@ -51,7 +51,9 @@ public class CommentController {
 
     @DeleteMapping("{commentId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteComment(@PathVariable Long commentId) {
+    public void deleteComment(
+            @PathVariable Long commentId
+    ) {
         commentRepository.deleteById(commentId);
     }
 }

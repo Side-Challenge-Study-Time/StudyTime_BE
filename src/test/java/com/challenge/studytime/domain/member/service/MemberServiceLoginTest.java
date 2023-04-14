@@ -4,7 +4,7 @@ import com.challenge.studytime.domain.member.dto.request.MemberLoginDto;
 import com.challenge.studytime.domain.member.dto.request.MemberSignupDto;
 import com.challenge.studytime.domain.member.dto.response.MemberLoginResponseDto;
 import com.challenge.studytime.domain.member.entity.Member;
-import com.challenge.studytime.domain.member.repositry.MemberRepositry;
+import com.challenge.studytime.domain.member.repositry.MemberRepository;
 import com.challenge.studytime.domain.refreshToken.service.RefreshTokenService;
 import com.challenge.studytime.domain.role.entity.Role;
 import com.challenge.studytime.domain.role.enums.RoleEnum;
@@ -31,7 +31,7 @@ class MemberServiceLoginTest {
     @Autowired
     private MemberService memberService;
     @Autowired
-    private MemberRepositry memberRepositry;
+    private MemberRepository MemberRepository;
 
 
     @BeforeEach

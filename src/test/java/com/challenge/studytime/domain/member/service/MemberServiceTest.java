@@ -2,7 +2,7 @@ package com.challenge.studytime.domain.member.service;
 
 import com.challenge.studytime.domain.member.dto.request.MemberSignupDto;
 import com.challenge.studytime.domain.member.entity.Member;
-import com.challenge.studytime.domain.member.repositry.MemberRepositry;
+import com.challenge.studytime.domain.member.repositry.MemberRepository;
 import com.challenge.studytime.domain.refreshToken.service.RefreshTokenService;
 import com.challenge.studytime.domain.role.entity.Role;
 import com.challenge.studytime.domain.role.enums.RoleEnum;
@@ -25,7 +25,7 @@ class MemberServiceTest {
     private MemberService memberService;
     private JwtTokenizer jwtTokenizer;
 
-    private MemberRepositry memberRepositry = mock(MemberRepositry.class);
+    private MemberRepository MemberRepository = mock(MemberRepository.class);
     private RoleRepository roleRepository = mock(RoleRepository.class);
 
 
@@ -44,7 +44,7 @@ class MemberServiceTest {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         jwtTokenizer = new JwtTokenizer(SECRET, REFRESH);
 
-        memberService = new MemberService(memberRepositry, roleRepository, passwordEncoder, jwtTokenizer, refreshTokenService);
+        memberService = new MemberService(MemberRepository, roleRepository, passwordEncoder, jwtTokenizer, refreshTokenService);
 
         Member member = Member.builder()
                 .email(VALID_EMAIL)
@@ -62,10 +62,10 @@ class MemberServiceTest {
                 .name(RoleEnum.ROLE_CUSTOMER.getRoleName())
                 .build();
 
-        given(memberRepositry.existsByEmail(VALID_EMAIL)).willReturn(false);
+        given(MemberRepository.existsByEmail(VALID_EMAIL)).willReturn(false);
         when(roleRepository.findByName(RoleEnum.ROLE_USER.getRoleName())).thenReturn(Optional.of(userRole));
         when(roleRepository.findByName(RoleEnum.ROLE_CUSTOMER.getRoleName())).thenReturn(Optional.of(userRole));
-        when(memberRepositry.save(any(Member.class))).thenReturn(member);
+        when(MemberRepository.save(any(Member.class))).thenReturn(member);
     }
 
     @Test
@@ -81,7 +81,7 @@ class MemberServiceTest {
         //when
         memberService.signUpMember(memberSignupDto);
         //Then
-        verify(memberRepositry).save(any(Member.class));
+        verify(MemberRepository).save(any(Member.class));
     }
 
     @Test
@@ -97,6 +97,6 @@ class MemberServiceTest {
         //when
         memberService.signUpMember(memberSignupDto);
         //Then
-        verify(memberRepositry).save(any(Member.class));
+        verify(MemberRepository).save(any(Member.class));
     }
 }

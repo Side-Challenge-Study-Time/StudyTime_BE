@@ -25,7 +25,7 @@ public class StorageController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> uploadImage(
             @RequestParam("image") MultipartFile file
-    , @PathVariable Long studyId) throws IOException {
+            , @PathVariable Long studyId) throws IOException {
         String uploadImage = storageService.uploadImage(file, studyId);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(uploadImage);

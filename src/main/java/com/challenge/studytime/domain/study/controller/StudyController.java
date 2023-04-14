@@ -13,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/study")
@@ -22,7 +24,9 @@ public class StudyController {
 
     @PostMapping("register")
     @ResponseStatus(HttpStatus.CREATED)
-    public StudyResponseDto registerStudy(@IfLogin LoginUserDto userDto, @RequestBody StudyRequestDto requestDto) {
+    public StudyResponseDto registerStudy(
+            @IfLogin LoginUserDto userDto,
+            @RequestBody StudyRequestDto requestDto) {
         return studyService.registerStudyProject(userDto, requestDto);
     }
 
@@ -38,19 +42,26 @@ public class StudyController {
 
     @GetMapping("detail/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public StudyResponseDto detailStudy(@PathVariable Long id) {
+    public StudyResponseDto detailStudy(
+            @PathVariable Long id
+    ) {
         return studyService.detailStudy(id);
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteStudy(@PathVariable Long id) {
+    public void deleteStudy(
+            @PathVariable Long id
+    ) {
         studyService.deleteByStudy(id);
     }
 
     @PatchMapping("modify/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public StudyResponseDto modifyStudy(@PathVariable Long id, @RequestBody StudyModifyRequestDto studyModifyRequestDto) {
+    public StudyResponseDto modifyStudy(
+            @PathVariable Long id,
+            @Valid @RequestBody StudyModifyRequestDto studyModifyRequestDto
+    ) {
         return studyService.modifyById(id, studyModifyRequestDto);
     }
 

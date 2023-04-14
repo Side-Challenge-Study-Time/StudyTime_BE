@@ -5,7 +5,7 @@ import com.challenge.studytime.domain.member.dto.request.MemberSignupDto;
 import com.challenge.studytime.domain.member.dto.response.MemberLoginResponseDto;
 import com.challenge.studytime.domain.member.dto.response.MemberSignupResponseDto;
 import com.challenge.studytime.domain.member.entity.Member;
-import com.challenge.studytime.domain.member.repositry.MemberRepositry;
+import com.challenge.studytime.domain.member.repositry.MemberRepository;
 import com.challenge.studytime.domain.refreshToken.service.RefreshTokenService;
 import com.challenge.studytime.domain.role.entity.Role;
 import com.challenge.studytime.domain.role.enums.RoleEnum;
@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MemberService {
 
-    private final MemberRepositry memberRepositry;
+    private final MemberRepository MemberRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenizer jwtTokenizer;
@@ -38,7 +38,8 @@ public class MemberService {
     public MemberSignupResponseDto signUpMember(MemberSignupDto loginDto) {
 
         String memberEmail = loginDto.getEmail();
-        if (memberRepositry.existsByEmail(memberEmail)) {
+
+        if (MemberRepository.existsByEmail(memberEmail)) {
             throw new UserEmailDuplicationException(memberEmail);
         }
 
@@ -52,7 +53,7 @@ public class MemberService {
         Optional<Role> userRole = roleRepository.findByName(RoleEnum.ROLE_USER.getRoleName());
         userRole.ifPresent(member::addRole);
 
-        return MemberSignupResponseDto.toDto(memberRepositry.save(member));
+        return MemberSignupResponseDto.toDto(MemberRepository.save(member));
     }
 
 
@@ -61,7 +62,7 @@ public class MemberService {
 
         String memberEmail = signupDto.getEmail();
 
-        if (memberRepositry.existsByEmail(memberEmail)) {
+        if (MemberRepository.existsByEmail(memberEmail)) {
             throw new UserEmailDuplicationException(memberEmail);
         }
 
@@ -76,12 +77,12 @@ public class MemberService {
         Optional<Role> customRole = roleRepository.findByName(RoleEnum.ROLE_STUDY_LEADER.getRoleName());
         customRole.ifPresent(member::addRole);
 
-        return MemberSignupResponseDto.toDto(memberRepositry.save(member));
+        return MemberSignupResponseDto.toDto(MemberRepository.save(member));
     }
 
     @Transactional
     public MemberLoginResponseDto login(MemberLoginDto loginDto) {
-        Member member = memberRepositry.findByEmail(loginDto.getEmail())
+        Member member = MemberRepository.findByEmail(loginDto.getEmail())
                 .orElseThrow(() -> new NotFoundMemberEmail(loginDto.getEmail()));
 
 

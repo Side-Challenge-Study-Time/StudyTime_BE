@@ -65,13 +65,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private void getAuthentication(String token) {
-        //token을 담는다.
         JwtAuthenticationToken authenticationToken = new JwtAuthenticationToken(token);
-        //토큰을 가지고 Authentication 객체를 만드는데 가지고 있는 내용은 id,role
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
 
         SecurityContextHolder.getContext()
-                .setAuthentication(authenticate);//언제든지 인증 정보를 가져올 수 있다.
+                .setAuthentication(authenticate);
     }
 
     private String getToken(HttpServletRequest request) {

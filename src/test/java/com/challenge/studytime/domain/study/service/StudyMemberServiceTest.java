@@ -1,7 +1,7 @@
 package com.challenge.studytime.domain.study.service;
 
 import com.challenge.studytime.domain.member.entity.Member;
-import com.challenge.studytime.domain.member.repositry.MemberRepositry;
+import com.challenge.studytime.domain.member.repositry.MemberRepository;
 import com.challenge.studytime.domain.role.entity.Role;
 import com.challenge.studytime.domain.role.enums.RoleEnum;
 import com.challenge.studytime.domain.role.repositry.RoleRepository;
@@ -32,7 +32,7 @@ public class StudyMemberServiceTest {
     @Autowired
     private StudyRepository studyRepository;
     @Autowired
-    private MemberRepositry memberRepositry;
+    private MemberRepository MemberRepository;
     @Autowired
     private RoleRepository roleRepository;
 
@@ -44,7 +44,7 @@ public class StudyMemberServiceTest {
                 .password("1234")
                 .build();
 
-        memberRepositry.save(member);
+        MemberRepository.save(member);
 
         Study study = Study.builder()
                 .title("제목")

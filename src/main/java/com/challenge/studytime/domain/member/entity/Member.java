@@ -63,8 +63,8 @@ public class Member {
 
 
 
-    @Builder.Default
     @ManyToMany
+    @Builder.Default
     @JoinTable(name = "member_role",
             joinColumns = @JoinColumn(name = "member_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")

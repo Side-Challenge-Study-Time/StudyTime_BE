@@ -8,7 +8,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import java.util.List;
 
-public class CommentRepositoryCustomImpl implements CommentRepositoryCustom{
+public class CommentRepositoryCustomImpl implements CommentRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
 

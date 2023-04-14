@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name="refresh_token")
+@Table(name = "refresh_token")
 @NoArgsConstructor
 @Setter
 @Getter

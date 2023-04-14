@@ -4,7 +4,7 @@ import com.challenge.studytime.domain.comment.dto.response.CommentDto;
 import com.challenge.studytime.domain.comment.entity.Comment;
 import com.challenge.studytime.domain.comment.repository.CommentRepository;
 import com.challenge.studytime.domain.member.entity.Member;
-import com.challenge.studytime.domain.member.repositry.MemberRepositry;
+import com.challenge.studytime.domain.member.repositry.MemberRepository;
 import com.challenge.studytime.domain.study.entity.Study;
 import com.challenge.studytime.domain.study.repository.StudyRepository;
 import com.challenge.studytime.global.exception.comment.NotFoundCommentWithParentId;
@@ -22,7 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentService {
     private final CommentRepository commentRepository;
-    private final MemberRepositry memberRepositry;
+    private final MemberRepository MemberRepository;
     private final StudyRepository studyRepository;
 
     @Transactional
@@ -31,7 +31,7 @@ public class CommentService {
                 .content(content)
                 .build();
 
-        Member member = memberRepositry.findById(userDto.getMemberId())
+        Member member = MemberRepository.findById(userDto.getMemberId())
                 .orElseThrow(() -> new NotFoundMemberid(userDto.getMemberId()));
 
         Study study = studyRepository.findById(studyId)
@@ -53,7 +53,7 @@ public class CommentService {
                 .parent(parentComment)
                 .build();
 
-        Member member = memberRepositry.findById(userDto.getMemberId())
+        Member member = MemberRepository.findById(userDto.getMemberId())
                 .orElseThrow(() -> new NotFoundMemberid(userDto.getMemberId()));
 
         parentComment.addCommentWithMember(member);
