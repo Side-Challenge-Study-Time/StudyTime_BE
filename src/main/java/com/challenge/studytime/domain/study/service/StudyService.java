@@ -1,7 +1,7 @@
 package com.challenge.studytime.domain.study.service;
 
 import com.challenge.studytime.domain.member.entity.Member;
-import com.challenge.studytime.domain.member.repositry.MemberRepositry;
+import com.challenge.studytime.domain.member.repositry.MemberRepository;
 import com.challenge.studytime.domain.role.entity.Role;
 import com.challenge.studytime.domain.role.enums.RoleEnum;
 import com.challenge.studytime.domain.role.repositry.RoleRepository;
@@ -27,13 +27,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class StudyService {
 
-    private final MemberRepositry memberRepositry;
+    private final MemberRepository MemberRepository;
     private final StudyRepository studyRepository;
     private final RoleRepository roleRepository;
 
     @Transactional
     public StudyResponseDto registerStudyProject(LoginUserDto userDto, StudyRequestDto requestDto) {
-        Member member = memberRepositry.findById(userDto.getMemberId())
+        Member member = MemberRepository.findById(userDto.getMemberId())
                 .orElseThrow(() -> new NotFoundMemberid(userDto.getMemberId()));
 
         Study study = Study.builder()
@@ -48,7 +48,7 @@ public class StudyService {
         leaderRole.ifPresent(member::addRole);
 
 
-        memberRepositry.save(member);
+        MemberRepository.save(member);
 
         return StudyResponseDto.toDto(studyRepository.save(study));
     }
