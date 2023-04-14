@@ -6,7 +6,7 @@ import com.challenge.studytime.domain.coupon.dto.response.CouponHistoryResponseD
 import com.challenge.studytime.domain.coupon.entity.CouponHistory;
 import com.challenge.studytime.domain.coupon.repository.CouponHistoryRepository;
 import com.challenge.studytime.domain.member.entity.Member;
-import com.challenge.studytime.domain.member.repositry.MemberRepositry;
+import com.challenge.studytime.domain.member.repositry.MemberRepository;
 import com.challenge.studytime.global.exception.coupon.CouponDuplicationException;
 import com.challenge.studytime.global.exception.coupon.CouponNotAvailableException;
 import com.challenge.studytime.global.exception.coupon.NotFoundCoupon;
@@ -27,14 +27,14 @@ import java.util.UUID;
 public class CouponHistoryService {
     private final CouponHistoryRepository couponHistoryRepository;
     private final CouponRepository couponRepository;
-    private final MemberRepositry memberRepositry;
+    private final MemberRepository MemberRepository;
 
     @Transactional
     public CouponHistoryResponseDto registerCouponHistory(Long couponId, LoginUserDto userDto) {
         UUID uuid = UUID.randomUUID();
         Coupon coupon = couponRepository.findById(couponId)
                 .orElseThrow(() -> new NotFoundCoupon(couponId.toString()));
-        Member member = memberRepositry.findById(userDto.getMemberId())
+        Member member = MemberRepository.findById(userDto.getMemberId())
                 .orElseThrow(() -> new NotFoundMemberid(userDto.getMemberId()));
         if (coupon.getMaxissuedCount() <= couponHistoryRepository.countByCouponId(userDto.getMemberId())) {
             throw new CouponDuplicationException();
