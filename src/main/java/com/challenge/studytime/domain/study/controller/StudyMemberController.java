@@ -16,7 +16,10 @@ public class StudyMemberController {
 
     @PostMapping("{studyId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@PathVariable Long studyId, @IfLogin LoginUserDto userDto) {
-        studyMemberService.create(studyId,userDto);
+    public void create(
+            @PathVariable Long studyId,
+            @IfLogin LoginUserDto userDto
+    ) {
+        studyMemberService.create(studyId, userDto);
     }
 }
