@@ -28,16 +28,12 @@ public class JwtTokenizer {
         this.refreshSecret = refreshSecret.getBytes(UTF_8);
     }
 
-    /**
-     * AccessToken 생성
-     */
+
     public String createAccessToken(Long id, String email, List<String> roles) {
         return createToken(id, email, roles, ACCESS_TOKEN_EXPIRE_COUNT, accessSecret);
     }
 
-    /**
-     * RefreshToken 생성
-     */
+
     public String createRefreshToken(Long id, String email, List<String> roles) {
         return createToken(id, email, roles, REFRESH_TOKEN_EXPIRE_COUNT, refreshSecret);
     }
@@ -58,14 +54,12 @@ public class JwtTokenizer {
                 .compact();
     }
 
-    /**
-     * 토큰에서 유저 아이디 얻기
-     */
+
     public Long getUserIdFromToken(String token) {
         String[] tokenArr = token.split(" ");
         token = tokenArr[1];
         Claims claims = parseToken(token, accessSecret);
-        return Long.valueOf((Integer)claims.get("userId"));
+        return Long.valueOf((Integer) claims.get("userId"));
     }
 
     public Claims parseAccessToken(String accessToken) {
