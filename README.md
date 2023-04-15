@@ -36,7 +36,7 @@
 - [무건 : Refresh Token Redis로 저장하기](https://pos04167.tistory.com/182)
 - [무건 : Data JPA N+1 이슈 해결하기](https://pos04167.tistory.com)
 
-### DevOps 과정
+### DevOps 블로깅
 - [무건 : 백엔드 개발자는 왜 AWS를 배워야 하는가?](https://pos04167.tistory.com/167)
 - [무건 : Jenkins CI/CD는 무엇인가?](https://pos04167.tistory.com/183)
 
