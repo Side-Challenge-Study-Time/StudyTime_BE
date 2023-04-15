@@ -150,12 +150,11 @@ src
 </table>
 
 
-# ✍ 프로젝트 목표
-1. 문서화를 통한 협업
+# ✍ 우리는 이렇게 Git Flow 전략을 사용하였습니다.
+✳ 참고: 강남언니 GitFlow? 들어도 봤고, 쓰고도 있는데...
+![image](https://user-images.githubusercontent.com/103854287/232238187-1cdf646d-b632-4f6d-ae28-82de7118e6a0.png)
 
-2. 테스트 코드
-
-3. Git-Flow
+[ 자세한 내용 ] [무건 :블로그 정리](https://pos04167.tistory.com/186)
 
 
 # 🧊 ERD Diagram
