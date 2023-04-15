@@ -3,6 +3,7 @@ package com.challenge.studytime.domain.member.entity;
 
 import com.challenge.studytime.domain.comment.entity.Comment;
 import com.challenge.studytime.domain.coupon.entity.CouponHistory;
+import com.challenge.studytime.domain.reservation.entity.Reservation;
 import com.challenge.studytime.domain.role.entity.Role;
 import com.challenge.studytime.domain.study.entity.Study;
 import com.challenge.studytime.domain.study.entity.StudyMember;
@@ -56,6 +57,9 @@ public class Member {
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StudyRoom> studyRooms = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Reservation> reservations = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "member",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
