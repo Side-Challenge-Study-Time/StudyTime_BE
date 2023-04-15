@@ -5,10 +5,6 @@
 <img src="https://user-images.githubusercontent.com/103854287/229304023-5cd76539-1c4a-450d-a79e-4d8b814c46c8.png" style="width: 50%; height: 40%;" />
 </p>
 
-
-## 🎉프로젝트 소개
-> 모두를 위한 스터디 예약, 스터디 타임!• <b>백엔드</b> 레포지토리
-
 <br>
 
 ### 팀원소개
@@ -27,6 +23,8 @@
   </tr>
 </table>
 
+<br>
+
 ## 🔍 개발 과정
 ### Back End 블로깅
 - [무건 : 프로젝트를 하면서 나는 Git Flow를 어떻게 사용을 했는가?](https://pos04167.tistory.com/186)
@@ -40,7 +38,7 @@
 - [무건 : 백엔드 개발자는 왜 AWS를 배워야 하는가?](https://pos04167.tistory.com/167)
 - [무건 : Jenkins CI/CD는 무엇인가?](https://pos04167.tistory.com/183)
 
-
+<br>
 
 ### 프로젝트 구조도
 ```bash
@@ -54,13 +52,14 @@ src
 │   └── jwt 
 │ 
 └── Domain   
-       └── domains 
-           └── <도메인>  # 각도메인 ex : order ,ticket
+       └── <도메인>  # 각도메인 ex : order ,ticket
              └── controller # 도메인 컨트롤러
              └── domain # 도메인 오브젝트
              └── repostiory # 도메인 리포지토리
              └── service # 도메인 서비스, 도메인 이벤트 핸들러
 ```
+
+<br>
 
 # 👨‍🔧기술 스택
 <div align="left">
@@ -88,6 +87,7 @@ src
 
 </div>
 
+<br>
 
 # 🐌Git Commit Convention
 <table>
@@ -149,6 +149,8 @@ src
   </tr>
 </table>
 
+<br>
+
 
 # ✍ 우리는 이렇게 Git Flow 전략을 사용하였습니다.
 
@@ -159,9 +161,12 @@ src
 ![image](https://user-images.githubusercontent.com/103854287/232238187-1cdf646d-b632-4f6d-ae28-82de7118e6a0.png)
 
 
+<br>
+
 
 # 🧊 ERD Diagram
 ![image](https://user-images.githubusercontent.com/103854287/230743169-928d74c7-2983-4780-8bfc-a600b641f9dd.png)
 
+<br>
 
 # 🏛️ Architecture
