@@ -19,6 +19,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "study", indexes = @Index(name = "idx_title_studyTitle",columnList ="study_title"))
 public class Study {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
