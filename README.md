@@ -170,4 +170,4 @@ src
 <br>
 
 # 🏛️ Architecture
-![image](https://user-images.githubusercontent.com/103854287/232328175-ce12d16a-4953-4fd2-95ff-ae791ac91867.png)
+![image](https://user-images.githubusercontent.com/103854287/232328354-3ad914ef-8605-4293-8601-f41acf9a4403.png)
