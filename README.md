@@ -28,11 +28,11 @@
 ## 🔍 개발 과정
 ### Back End 블로깅
 - [무건 : 프로젝트를 하면서 나는 Git Flow를 어떻게 사용을 했는가?](https://pos04167.tistory.com/186)
-- [무건 : Spring Security & JWT](https://pos04167.tistory.com/165)
+- [무건 : JMeter를 이용한 Redis 캐싱 전략 Read 최적화](https://pos04167.tistory.com/188)
 - [무건 : 나는 동시성 이슈를 어떻게 해결을 하였는가](https://pos04167.tistory.com/177)
-- [무건 : QueryDSL Read 성능 최적화](https://pos04167.tistory.com/178)
 - [무건 : Refresh Token Redis로 저장하기](https://pos04167.tistory.com/182)
-- [무건 : Data JPA N+1 이슈 해결하기](https://pos04167.tistory.com)
+- [무건 : QueryDSL Read 성능 최적화](https://pos04167.tistory.com/178)
+- [무건 : Spring Security & JWT](https://pos04167.tistory.com/165)
 
 ### DevOps 블로깅
 - [무건 : 백엔드 개발자는 왜 AWS를 배워야 하는가?](https://pos04167.tistory.com/167)
