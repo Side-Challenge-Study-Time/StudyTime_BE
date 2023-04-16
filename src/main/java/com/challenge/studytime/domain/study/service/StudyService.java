@@ -15,6 +15,7 @@ import com.challenge.studytime.domain.study.repository.StudyRepository;
 import com.challenge.studytime.global.exception.member.NotFoundMemberid;
 import com.challenge.studytime.global.util.LoginUserDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,9 +38,10 @@ public class StudyService {
     private final RoleRepository roleRepository;
 
     @Transactional
-    public StudyResponseDto registerStudyProject(LoginUserDto userDto, StudyRequestDto requestDto) {
-        Member member = MemberRepository.findById(userDto.getMemberId())
-                .orElseThrow(() -> new NotFoundMemberid(userDto.getMemberId()));
+    @CacheEvict(key = "#memberId", value = STUDY_LIST, cacheManager = "redisCacheManager")
+    public StudyResponseDto registerStudyProject(Long memberId, StudyRequestDto requestDto) {
+        Member member = MemberRepository.findById(memberId)
+                .orElseThrow(() -> new NotFoundMemberid(memberId));
 
         Study study = Study.builder()
                 .content(requestDto.getContent())
@@ -85,8 +87,8 @@ public class StudyService {
     }
 
     @Transactional
-    public StudyResponseDto modifyById(Long id, StudyModifyRequestDto studyModifyRequestDto) {
-        Study study = studyRepository.findByIdAndDeleteStudyFalse(id)
+    public StudyResponseDto modifyById(Long studyId, StudyModifyRequestDto studyModifyRequestDto) {
+        Study study = studyRepository.findByIdAndDeleteStudyFalse(studyId)
                 .orElseThrow();
 
         study.updateStudy(studyModifyRequestDto);
