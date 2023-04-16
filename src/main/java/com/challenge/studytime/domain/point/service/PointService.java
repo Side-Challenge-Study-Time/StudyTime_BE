@@ -1,7 +1,8 @@
 package com.challenge.studytime.domain.point.service;
 
 import com.challenge.studytime.domain.member.entity.Member;
-import com.challenge.studytime.domain.member.repositry.MemberRepositry;
+
+import com.challenge.studytime.domain.member.repositry.MemberRepository;
 import com.challenge.studytime.domain.point.dto.requestdto.PointRequestDto;
 import com.challenge.studytime.domain.point.dto.responsedto.PointResponseDto;
 import com.challenge.studytime.domain.point.entity.Point;
@@ -16,10 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class PointService {
     private final PointRepository pointRepository;
-    private final MemberRepositry memberRepositry;
+    private final MemberRepository memberRepository;
     @Transactional
     public PointResponseDto registerPoint(Long memberId,PointRequestDto requestDto){
-        Member member = memberRepositry.findById(memberId)
+        Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new NotFoundMemberid(memberId));
         Point point = pointRepository.save(
                 Point.builder()
