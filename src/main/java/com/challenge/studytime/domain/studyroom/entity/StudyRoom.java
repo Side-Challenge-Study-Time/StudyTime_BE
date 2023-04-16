@@ -1,6 +1,7 @@
 package com.challenge.studytime.domain.studyroom.entity;
 
 import com.challenge.studytime.domain.member.entity.Member;
+import com.challenge.studytime.domain.reservation.entity.Reservation;
 import com.challenge.studytime.domain.studyroom.dto.request.StudyRoomModifyRequestDto;
 import com.challenge.studytime.domain.studyroom.dto.request.StudyRoomRequestDto;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -33,6 +36,10 @@ public class StudyRoom {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @OneToMany(mappedBy = "studyRoom", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Reservation> reservations = new ArrayList<>();
+
     public void setMemberFromStudyRoom(Member member){
         this.member = member;
         if(member != null && !member.getStudyRooms().contains(this)){

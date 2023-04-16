@@ -6,6 +6,6 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 public class RefreshTokenDto {
-    @NotEmpty
+    @NotEmpty(message = "refresh token을 입력하세요.")
     String refreshToken;
 }

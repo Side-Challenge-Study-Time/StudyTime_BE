@@ -35,22 +35,19 @@ public class IfLoginArgumentResolver implements HandlerMethodArgumentResolver {
             return null;
         }
 
-        JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken)authentication;
+        JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) authentication;
         LoginUserDto loginUserDto = new LoginUserDto();
 
         Object principal = jwtAuthenticationToken.getPrincipal(); // LoginInfoDto
         if (principal == null)
             return null;
 
-        LoginInfoDto loginInfoDto = (LoginInfoDto)principal;
+        LoginInfoDto loginInfoDto = (LoginInfoDto) principal;
         loginUserDto.setMemberId(loginInfoDto.getMemberId());
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
-        while (iterator.hasNext()) {
-            GrantedAuthority grantedAuthority = iterator.next();
+        for (GrantedAuthority grantedAuthority : authorities) {
             String role = grantedAuthority.getAuthority();
-            System.out.println("+================================="+role);
             loginUserDto.addRole(role);
         }
 

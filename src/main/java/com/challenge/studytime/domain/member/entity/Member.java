@@ -3,6 +3,7 @@ package com.challenge.studytime.domain.member.entity;
 
 import com.challenge.studytime.domain.comment.entity.Comment;
 import com.challenge.studytime.domain.coupon.entity.CouponHistory;
+import com.challenge.studytime.domain.reservation.entity.Reservation;
 import com.challenge.studytime.domain.role.entity.Role;
 import com.challenge.studytime.domain.study.entity.Study;
 import com.challenge.studytime.domain.study.entity.StudyMember;
@@ -63,8 +64,8 @@ public class Member {
 
 
 
-    @Builder.Default
     @ManyToMany
+    @Builder.Default
     @JoinTable(name = "member_role",
             joinColumns = @JoinColumn(name = "member_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")

@@ -75,10 +75,10 @@ public class StudyRepositoryImpl implements StudyRepositoryCustom {
     }
 
     private BooleanExpression studyContentEq(String studyContent) {
-        return StringUtils.hasText(studyContent)?study.content.eq(studyContent):null;
+        return StringUtils.hasText(studyContent) ? study.content.eq(studyContent) : null;
     }
 
     private BooleanExpression studyTitleEq(String studyTitle) {
-        return StringUtils.hasText(studyTitle)?study.title.eq(studyTitle):null;
+        return StringUtils.hasText(studyTitle) ? study.title.eq(studyTitle) : null;
     }
 }

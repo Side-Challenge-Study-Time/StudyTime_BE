@@ -16,7 +16,7 @@ public class LoginUserDto {
     private Long memberId;
     private List<String> roles = new ArrayList<>();
 
-    public void addRole(String role){
+    public void addRole(String role) {
         roles.add(role);
     }
 }

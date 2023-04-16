@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import javax.persistence.LockModeType;
+import java.util.List;
 import java.util.Optional;
 
 public interface StudyRepository extends JpaRepository<Study, Long>, StudyRepositoryCustom {
@@ -14,4 +15,7 @@ public interface StudyRepository extends JpaRepository<Study, Long>, StudyReposi
     @Lock(value = LockModeType.PESSIMISTIC_WRITE)
     @Query("select s from Study s where s.id=:id AND s.deleteStudy=false ")
     Optional<Study> findByIdAndDeleteStudyFalse(@Param("id") Long id);
+
+    @Query("select s from Study s where s.member.id=:memberId")
+    List<Study> findByMemberId(@Param("memberId") Long memberId);
 }

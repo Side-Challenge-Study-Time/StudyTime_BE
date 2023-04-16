@@ -1,7 +1,7 @@
 package com.challenge.studytime.domain.studyroom.service;
 
 import com.challenge.studytime.domain.member.entity.Member;
-import com.challenge.studytime.domain.member.repositry.MemberRepositry;
+import com.challenge.studytime.domain.member.repositry.MemberRepository;
 import com.challenge.studytime.domain.studyroom.dto.request.StudyRoomModifyRequestDto;
 import com.challenge.studytime.domain.studyroom.dto.request.StudyRoomRequestDto;
 import com.challenge.studytime.domain.studyroom.dto.response.StudyRoomResponseDto;
@@ -21,7 +21,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class StudyRoomService {
-    private final MemberRepositry memberRepositry;
+    private final MemberRepository MemberRepository;
     private final StudyRoomRepository studyRoomRepository;
     private void validateRequestDto(StudyRoomRequestDto requestDto) {
         if (requestDto.getPrice() <= 0 || requestDto.getCapacity() <= 0) {
@@ -30,7 +30,7 @@ public class StudyRoomService {
     }
     @Transactional
     public StudyRoomResponseDto registerStudyRoom(LoginUserDto userDto, StudyRoomRequestDto requestDto){
-        Member member = memberRepositry.findById(userDto.getMemberId())
+        Member member = MemberRepository.findById(userDto.getMemberId())
                 .orElseThrow(() -> new NotFoundMemberid(userDto.getMemberId()));
         validateRequestDto(requestDto);
         StudyRoom studyRoom = studyRoomRepository.save(StudyRoom.builder()

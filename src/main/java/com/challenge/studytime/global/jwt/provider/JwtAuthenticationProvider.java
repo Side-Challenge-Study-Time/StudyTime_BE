@@ -25,10 +25,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         JwtAuthenticationToken authenticationToken = (JwtAuthenticationToken) authentication;
-        // 토큰을 검증한다. 기간이 만료되었는지, 토큰 문자열이 문제가 있는지 등 Exception이 발생한다.
-        //claim 정보를 추출
         Claims claims = jwtTokenizer.parseAccessToken(authenticationToken.getToken());
-        // sub에 암호화된 데이터를 집어넣고, 복호화하는 코드를 넣어줄 수 있다.
 
         Long memberId = claims.get("memberId", Long.class);
         List<GrantedAuthority> authorities = getGrantedAuthorities(claims);
@@ -43,7 +40,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         List<String> roles = (List<String>) claims.get("roles");
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (String role : roles) {
-            authorities.add(()-> role);
+            authorities.add(() -> role);
         }
         return authorities;
     }

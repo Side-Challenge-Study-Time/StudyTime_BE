@@ -1,7 +1,8 @@
 package com.challenge.studytime.domain.study.service;
 
 import com.challenge.studytime.domain.member.entity.Member;
-import com.challenge.studytime.domain.member.repositry.MemberRepositry;
+import com.challenge.studytime.domain.member.repositry.MemberRepository;
+import com.challenge.studytime.domain.study.dto.response.StudyMemberResponse;
 import com.challenge.studytime.domain.study.entity.Study;
 import com.challenge.studytime.domain.study.entity.StudyMember;
 import com.challenge.studytime.domain.study.repository.StudyMemberRepository;
@@ -25,7 +26,7 @@ public class StudyMemberService {
 
     private final StudyMemberRepository studyMemberRepository;
     private final StudyRepository studyRepository;
-    private final MemberRepositry memberRepositry;
+    private final MemberRepository MemberRepository;
 
     @Transactional
     public void create(Long studyId, LoginUserDto userDto) {
@@ -35,7 +36,7 @@ public class StudyMemberService {
         Study study = studyRepository.findByIdAndDeleteStudyFalse(studyId)
                 .orElseThrow(() -> new NotFoundStudyWithId(studyId));
 
-        Member member = memberRepositry.findById(userDto.getMemberId())
+        Member member = MemberRepository.findById(userDto.getMemberId())
                 .orElseThrow(() -> new NotFoundMemberid(userDto.getMemberId()));
 
 
@@ -65,5 +66,17 @@ public class StudyMemberService {
         if (memberIds.contains(userDto.getMemberId())) {
             throw new RuntimeException("Duplicate member id detected: " + userDto.getMemberId()); // 특정 값과 중복된 경우 오류 발생
         }
+    }
+
+    @Transactional(readOnly = true)
+    public List<StudyMemberResponse> searchStudyMemberFullSrch() {
+        List<StudyMember> studyMembers = studyMemberRepository.findAll();
+        return studyMembers.stream()
+                .map(studyMember -> StudyMemberResponse.builder()
+                        .id(studyMember.getId())
+                        .memberId(studyMember.getMember().getId())
+                        .studyId(studyMember.getStudy().getId())
+                        .build())
+                .collect(Collectors.toList());
     }
 }

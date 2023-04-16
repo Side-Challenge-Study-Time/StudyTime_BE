@@ -13,6 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/study")
@@ -22,8 +25,11 @@ public class StudyController {
 
     @PostMapping("register")
     @ResponseStatus(HttpStatus.CREATED)
-    public StudyResponseDto registerStudy(@IfLogin LoginUserDto userDto, @RequestBody StudyRequestDto requestDto) {
-        return studyService.registerStudyProject(userDto, requestDto);
+    public StudyResponseDto registerStudy(
+            @IfLogin LoginUserDto userDto,
+            @RequestBody StudyRequestDto requestDto) {
+        Long memberId = userDto.getMemberId();
+        return studyService.registerStudyProject(memberId, requestDto);
     }
 
     @GetMapping("fullSrch")
@@ -36,22 +42,31 @@ public class StudyController {
         return studyService.fullSearch(requestDto, page, size);
     }
 
-    @GetMapping("detail/{id}")
+
+    @GetMapping("detail")
     @ResponseStatus(HttpStatus.OK)
-    public StudyResponseDto detailStudy(@PathVariable Long id) {
-        return studyService.detailStudy(id);
+    public List<StudyResponseDto> detailStudy(
+            @IfLogin LoginUserDto userDto
+    ) {
+        Long memberId = userDto.getMemberId();
+        return studyService.detailStudy(memberId);
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteStudy(@PathVariable Long id) {
+    public void deleteStudy(
+            @PathVariable Long id
+    ) {
         studyService.deleteByStudy(id);
     }
 
-    @PatchMapping("modify/{id}")
+    @PatchMapping("modify/{studyId}")
     @ResponseStatus(HttpStatus.OK)
-    public StudyResponseDto modifyStudy(@PathVariable Long id, @RequestBody StudyModifyRequestDto studyModifyRequestDto) {
-        return studyService.modifyById(id, studyModifyRequestDto);
+    public StudyResponseDto modifyStudy(
+            @PathVariable Long studyId,
+            @Valid @RequestBody StudyModifyRequestDto studyModifyRequestDto
+    ) {
+        return studyService.modifyById(studyId, studyModifyRequestDto);
     }
 
 }

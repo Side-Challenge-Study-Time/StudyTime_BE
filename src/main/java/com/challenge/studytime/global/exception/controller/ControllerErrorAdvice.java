@@ -8,6 +8,8 @@ import com.challenge.studytime.global.exception.coupon.NotFoundCoupon;
 import com.challenge.studytime.global.exception.member.NotMatchPassword;
 import com.challenge.studytime.global.exception.member.UserEmailDuplicationException;
 import com.challenge.studytime.global.exception.refreshToken.NotFoundRefreshToken;
+import com.challenge.studytime.global.exception.reservation.DifferentDateException;
+import com.challenge.studytime.global.exception.reservation.NotFoundReservation;
 import com.challenge.studytime.global.exception.studyroom.NotFoundStudyRoom;
 import com.challenge.studytime.global.exception.studyroom.NotillegalException;
 import lombok.extern.slf4j.Slf4j;
@@ -80,5 +82,19 @@ public class ControllerErrorAdvice {
     public ErrorResponse NotillegalException(){
         log.error("Not Valid value");
         return new ErrorResponse("400", "Not Valid value");
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(DifferentDateException.class)
+    public ErrorResponse DifferentDateException(){
+        log.error("Different Date");
+        return new ErrorResponse("400", "Different Date");
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NotFoundReservation.class)
+    public ErrorResponse NotFoundReservation(){
+        log.error("Not Found Reservation");
+        return new ErrorResponse("400", "Not Found Reservation");
     }
 }

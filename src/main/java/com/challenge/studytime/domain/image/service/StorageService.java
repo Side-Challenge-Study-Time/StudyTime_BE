@@ -4,7 +4,7 @@ import com.challenge.studytime.domain.image.dto.response.ImageResponseDto;
 import com.challenge.studytime.domain.image.entity.ImageData;
 import com.challenge.studytime.domain.image.repository.StorageRepository;
 import com.challenge.studytime.domain.member.entity.Member;
-import com.challenge.studytime.domain.member.repositry.MemberRepositry;
+import com.challenge.studytime.domain.member.repositry.MemberRepository;
 import com.challenge.studytime.domain.study.entity.Study;
 import com.challenge.studytime.domain.study.repository.StudyRepository;
 import com.challenge.studytime.global.exception.study.NotFoundStudyWithId;

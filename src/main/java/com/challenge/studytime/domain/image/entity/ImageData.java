@@ -37,6 +37,7 @@ public class ImageData {
             study.getImageDataList().add(this);
         }
     }
+
     @Builder
     public ImageData(String name, String type, byte[] imageData) {
         this.name = name;
