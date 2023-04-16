@@ -15,13 +15,18 @@ import com.challenge.studytime.domain.study.repository.StudyRepository;
 import com.challenge.studytime.global.exception.member.NotFoundMemberid;
 import com.challenge.studytime.global.util.LoginUserDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static com.challenge.studytime.global.redis.RedisCacheKey.STUDY_LIST;
 
 @Service
 @RequiredArgsConstructor
@@ -64,10 +69,12 @@ public class StudyService {
     }
 
     @Transactional
-    public StudyResponseDto detailStudy(Long studyId) {
-        Study study = studyRepository.findByIdAndDeleteStudyFalse(studyId)
-                .orElseThrow();
-        return StudyResponseDto.toDto(study);
+    @Cacheable(key = "#memberId",value = STUDY_LIST, cacheManager = "redisCacheManager")
+    public List<StudyResponseDto> detailStudy(Long memberId) {
+        List<Study> studies = studyRepository.findByMemberId(memberId);
+        return studies.stream()
+                .map(StudyResponseDto::toDto)
+                .collect(Collectors.toList());
     }
 
     @Transactional
