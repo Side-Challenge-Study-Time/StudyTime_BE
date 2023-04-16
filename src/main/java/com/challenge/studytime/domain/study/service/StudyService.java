@@ -70,10 +70,15 @@ public class StudyService {
         return studyRepository.fullSrchWithStudy(requestDto, pageable);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Cacheable(key = "#memberId",value = STUDY_LIST, cacheManager = "redisCacheManager")
     public List<StudyResponseDto> detailStudy(Long memberId) {
-        List<Study> studies = studyRepository.findByMemberId(memberId);
+
+        Member member = MemberRepository.findById(memberId)
+                .orElseThrow(() -> new NotFoundMemberid(memberId));
+
+        List<Study> studies = studyRepository.findByMemberId(member.getId());
+
         return studies.stream()
                 .map(StudyResponseDto::toDto)
                 .collect(Collectors.toList());
