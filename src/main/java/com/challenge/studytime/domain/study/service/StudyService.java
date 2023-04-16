@@ -63,7 +63,7 @@ public class StudyService {
         return studyRepository.fullSrchWithStudy(requestDto, pageable);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public StudyResponseDto detailStudy(Long studyId) {
         Study study = studyRepository.findByIdAndDeleteStudyFalse(studyId)
                 .orElseThrow();
