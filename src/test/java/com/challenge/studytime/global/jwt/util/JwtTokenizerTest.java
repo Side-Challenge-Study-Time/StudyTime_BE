@@ -1,11 +1,15 @@
 package com.challenge.studytime.global.jwt.util;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
+
+@DisplayName("Jwt Access Token, Refresh Token")
 class JwtTokenizerTest {
 
     private JwtTokenizer jwtTokenizer;
@@ -24,6 +28,7 @@ class JwtTokenizerTest {
     public void createTokenWithValid() throws Exception{
         String accessToken = jwtTokenizer.createAccessToken(1L, "test@email.com", List.of("USER"));
         System.out.println("accessToken = " + accessToken);
+        assertThat(accessToken).isNotBlank();
     }
 
     @Test
@@ -31,5 +36,7 @@ class JwtTokenizerTest {
     public void createRefreshTokenWithValidToken() throws Exception{
         String refreshToken = jwtTokenizer.createRefreshToken(1L, "test@email.com", List.of("USER"));
         System.out.println("refreshToken = " + refreshToken);
+        assertThat(refreshToken).isNotBlank();
     }
+
 }
