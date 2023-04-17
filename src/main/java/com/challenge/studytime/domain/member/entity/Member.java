@@ -46,25 +46,29 @@ public class Member {
 
     @Builder.Default
     @JsonManagedReference
-    @OneToMany(mappedBy ="member" ,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    List<Study>studyList = new ArrayList<>();
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<Study> studyList = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StudyMember> studyMembers = new ArrayList<>();
-  
+
+    @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CouponHistory> couponHistories = new ArrayList<>();
-
+    @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StudyRoom> studyRooms = new ArrayList<>();
 
     @Builder.Default
-    @OneToMany(mappedBy = "member",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<>();
+
+    @Builder.Default
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private Point point;
 
