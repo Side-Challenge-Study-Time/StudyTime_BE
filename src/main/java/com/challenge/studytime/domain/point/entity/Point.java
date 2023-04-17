@@ -43,4 +43,7 @@ public class Point {
     public void chargePoint(int point){
         this.wallet += point;
     }
+    public void usePoint(int point){
+        this.wallet -= point;
+    }
 }

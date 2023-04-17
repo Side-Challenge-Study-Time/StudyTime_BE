@@ -44,7 +44,7 @@ public class ReservationController {
         reservationService.modifyReservation(reservationId, userDto.getMemberId(), roomId, requestDto);
     }
     @ResponseStatus(HttpStatus.OK)
-    @PatchMapping("{reservationId}/delete/{roomId}")
+    @DeleteMapping("{reservationId}/delete/{roomId}")
     public void deleteReservation(@IfLogin LoginUserDto userDto,
                                   @PathVariable("reservationId") Long reservationId,
                                   @PathVariable("roomId") Long roomId){
