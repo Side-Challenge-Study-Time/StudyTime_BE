@@ -44,10 +44,9 @@ public class RefreshTokenService {
     @Transactional(readOnly = true)
     public MemberLoginResponseDto findRefreshToken(RefreshTokenDto refreshTokenDto) {
 
-        RefreshToken refreshToken = refreshTokenRepository.findByValue(refreshTokenDto.getRefreshToken())
-                .orElseThrow(() -> new NotFoundMemberEmail(refreshTokenDto.getRefreshToken()));
+        String refreshToken = redisService.getValues(refreshTokenDto.getRefreshToken());
 
-        Claims claims = jwtTokenizer.parseRefreshToken(refreshToken.getValue());
+        Claims claims = jwtTokenizer.parseRefreshToken(refreshToken);
         Long userId = Long.valueOf((Integer) claims.get("memberId"));
 
         Member member = memberRepository.findById(userId)

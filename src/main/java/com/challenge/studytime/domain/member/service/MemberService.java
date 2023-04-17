@@ -74,7 +74,7 @@ public class MemberService {
                 .build();
 
 
-        Optional<Role> customRole = roleRepository.findByName(RoleEnum.ROLE_STUDY_LEADER.getRoleName());
+        Optional<Role> customRole = roleRepository.findByName(RoleEnum.ROLE_CUSTOMER.getRoleName());
         customRole.ifPresent(member::addRole);
 
         return MemberSignupResponseDto.toDto(MemberRepository.save(member));
