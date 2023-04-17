@@ -1,46 +1,34 @@
 package com.challenge.studytime.domain.member.service;
 
+import com.challenge.studytime.enums.TestInValidEnum;
+import com.challenge.studytime.enums.TestValidEnum;
 import com.challenge.studytime.domain.member.dto.request.MemberLoginDto;
 import com.challenge.studytime.domain.member.dto.request.MemberSignupDto;
 import com.challenge.studytime.domain.member.dto.response.MemberLoginResponseDto;
-import com.challenge.studytime.domain.member.entity.Member;
-import com.challenge.studytime.domain.member.repositry.MemberRepository;
-import com.challenge.studytime.domain.refreshToken.service.RefreshTokenService;
-import com.challenge.studytime.domain.role.entity.Role;
-import com.challenge.studytime.domain.role.enums.RoleEnum;
-import com.challenge.studytime.domain.role.repositry.RoleRepository;
-import com.challenge.studytime.global.jwt.util.JwtTokenizer;
+import com.challenge.studytime.global.exception.member.NotFoundMemberEmail;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class MemberServiceLoginTest {
 
     @Autowired
     private MemberService memberService;
-    @Autowired
-    private MemberRepository MemberRepository;
 
 
     @BeforeEach
     void setUp() {
         MemberSignupDto memberSignupDto = MemberSignupDto.builder()
-                .email("test@email.com")
-                .password("1234")
-                .name("김무건")
-                .birthday("1234")
+                .email(TestValidEnum.VALID_EMAIL.getMessage())
+                .password(TestValidEnum.VALID_PASSWORD.getMessage())
+                .name(TestValidEnum.VALID_NAME.getMessage())
+                .birthday(TestValidEnum.VALID_BIRTHDAY.getMessage())
                 .build();
         memberService.signUpMember(memberSignupDto);
     }
@@ -51,14 +39,27 @@ class MemberServiceLoginTest {
     public void memberLoginWithValid() throws Exception {
         //given
         MemberLoginDto loginDto = MemberLoginDto.builder()
-                .email("test@email.com")
-                .password("1234")
+                .email(TestValidEnum.VALID_EMAIL.getMessage())
+                .password(TestValidEnum.VALID_PASSWORD.getMessage())
                 .build();
         //when
         MemberLoginResponseDto memberLoginResponseDto = memberService.login(loginDto);
         //Then
-        Assertions.assertThat(memberLoginResponseDto.getEmail()).isEqualTo("test@email.com");
-        Assertions.assertThat(memberLoginResponseDto.getName()).isEqualTo("김무건");
+        Assertions.assertThat(memberLoginResponseDto.getEmail()).isEqualTo(TestValidEnum.VALID_EMAIL.getMessage());
+        Assertions.assertThat(memberLoginResponseDto.getName()).isEqualTo(TestValidEnum.VALID_NAME.getMessage());
     }
 
+    @Test
+    @DisplayName("POST_LOGIN_INVALID_TEST")
+    public void memberLoginWithInValid() {
+        //given
+        MemberLoginDto loginDto = MemberLoginDto.builder()
+                .email(TestInValidEnum.VALID_EMAIL.getMessage())
+                .password(TestInValidEnum.VALID_PASSWORD.getMessage())
+                .build();
+        //Then
+        Assertions.assertThatThrownBy(() -> memberService.login(loginDto))
+                .isInstanceOf(NotFoundMemberEmail.class)
+                .hasMessage("USER NOT Found: test");
+    }
 }
