@@ -159,7 +159,7 @@ src
 
 ## ✳ [ 우리가 진행한 방식 ] [무건 :블로그 정리](https://pos04167.tistory.com/186)
 
-<div style="width: 85%; height: auto;">
+<div style="width: 50%; height: auto;">
   <img src="https://user-images.githubusercontent.com/103854287/232238187-1cdf646d-b632-4f6d-ae28-82de7118e6a0.png">
 </div>
 
