@@ -3,6 +3,7 @@ package com.challenge.studytime.domain.member.entity;
 
 import com.challenge.studytime.domain.comment.entity.Comment;
 import com.challenge.studytime.domain.coupon.entity.CouponHistory;
+import com.challenge.studytime.domain.point.entity.Point;
 import com.challenge.studytime.domain.reservation.entity.Reservation;
 import com.challenge.studytime.domain.role.entity.Role;
 import com.challenge.studytime.domain.study.entity.Study;
@@ -45,24 +46,31 @@ public class Member {
 
     @Builder.Default
     @JsonManagedReference
-    @OneToMany(mappedBy ="member" ,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    List<Study>studyList = new ArrayList<>();
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<Study> studyList = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StudyMember> studyMembers = new ArrayList<>();
-  
+
+    @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CouponHistory> couponHistories = new ArrayList<>();
-
+    @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StudyRoom> studyRooms = new ArrayList<>();
 
     @Builder.Default
-    @OneToMany(mappedBy = "member",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
+    @Builder.Default
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Reservation> reservations = new ArrayList<>();
 
+    @Builder.Default
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    private Point point;
 
     @ManyToMany
     @Builder.Default

@@ -27,11 +27,12 @@
 
 ## 🔍 개발 과정
 ### Back End 블로깅
+- [무건 : 인덱스 적용을 통해 쿼리 성능 튜닝 후 QueryDSL 성능 172->12ms 성능 개선](https://pos04167.tistory.com/178)
+- [무건 : JMeter를 이용한 Redis 캐싱 전략 Read 성능 TPS 15.0->38.1/sec 개선](https://pos04167.tistory.com/188)
 - [무건 : 프로젝트를 하면서 나는 Git Flow를 어떻게 사용을 했는가?](https://pos04167.tistory.com/186)
-- [무건 : JMeter를 이용한 Redis 캐싱 전략 Read 최적화](https://pos04167.tistory.com/188)
 - [무건 : 나는 동시성 이슈를 어떻게 해결을 하였는가](https://pos04167.tistory.com/177)
+- [무건 : 스프링 Argument Resolver 중복 로직 처리](https://pos04167.tistory.com/189)
 - [무건 : Refresh Token Redis로 저장하기](https://pos04167.tistory.com/182)
-- [무건 : QueryDSL Read 성능 최적화](https://pos04167.tistory.com/178)
 - [무건 : Spring Security & JWT](https://pos04167.tistory.com/165)
 
 ### DevOps 블로깅
@@ -158,7 +159,12 @@ src
 
 ## ✳ [ 우리가 진행한 방식 ] [무건 :블로그 정리](https://pos04167.tistory.com/186)
 
-![image](https://user-images.githubusercontent.com/103854287/232238187-1cdf646d-b632-4f6d-ae28-82de7118e6a0.png)
+<div style="width: 50%; height: auto;">
+
+  <img src="https://user-images.githubusercontent.com/103854287/232238187-1cdf646d-b632-4f6d-ae28-82de7118e6a0.png">
+  
+</div>
+
 
 
 <br>

@@ -1,7 +1,7 @@
 package com.challenge.studytime.domain.reservation.service;
 
 import com.challenge.studytime.domain.member.entity.Member;
-import com.challenge.studytime.domain.member.repositry.MemberRepositry;
+import com.challenge.studytime.domain.member.repositry.MemberRepository;
 import com.challenge.studytime.domain.reservation.dto.request.ReservationRequestDto;
 import com.challenge.studytime.domain.reservation.dto.response.ReservationResponseDto;
 import com.challenge.studytime.domain.reservation.entity.Reservation;
@@ -24,7 +24,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ReservationService {
-    private final MemberRepositry memberRepositry;
+    private final MemberRepository memberRepositry;
     private final StudyRoomRepository studyRoomRepository;
     private final ReservationRepository reservationRepository;
 

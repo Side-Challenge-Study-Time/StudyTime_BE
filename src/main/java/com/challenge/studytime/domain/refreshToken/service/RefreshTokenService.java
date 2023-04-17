@@ -20,7 +20,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class RefreshTokenService {
-    private final RefreshTokenRepositry refreshTokenRepository;
     private final JwtTokenizer jwtTokenizer;
     private final MemberRepository memberRepository;
     private final RedisService redisService;

@@ -7,6 +7,7 @@ import com.challenge.studytime.domain.refreshToken.service.RefreshTokenService;
 import com.challenge.studytime.domain.role.entity.Role;
 import com.challenge.studytime.domain.role.enums.RoleEnum;
 import com.challenge.studytime.domain.role.repositry.RoleRepository;
+import com.challenge.studytime.enums.TestValidEnum;
 import com.challenge.studytime.global.jwt.util.JwtTokenizer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,19 +26,16 @@ class MemberServiceTest {
     private MemberService memberService;
     private JwtTokenizer jwtTokenizer;
 
-    private MemberRepository MemberRepository = mock(MemberRepository.class);
-    private RoleRepository roleRepository = mock(RoleRepository.class);
+    private final MemberRepository MemberRepository = mock(MemberRepository.class);
+    private final RoleRepository roleRepository = mock(RoleRepository.class);
 
 
-    private RefreshTokenService refreshTokenService= mock(RefreshTokenService.class);
+    private final RefreshTokenService refreshTokenService= mock(RefreshTokenService.class);
 
 
     private static final String SECRET = "12345678901234567890123456789012";
     private static final String REFRESH = "12345678901234567890123456789012";
-    private static final String VALID_EMAIL = "test@email.com";
-    private static final String VALID_PASSWORD = "1234";
-    private static final String VALID_BIRTHDAY = "1997-12-03";
-    private static final String VALID_NAME = "김무건";
+
 
     @BeforeEach
     void setUp() {
@@ -47,10 +45,10 @@ class MemberServiceTest {
         memberService = new MemberService(MemberRepository, roleRepository, passwordEncoder, jwtTokenizer, refreshTokenService);
 
         Member member = Member.builder()
-                .email(VALID_EMAIL)
-                .name(VALID_NAME)
-                .birthday(VALID_BIRTHDAY)
-                .password(VALID_PASSWORD) // 예상되는 암호화된 비밀번호
+                .email(TestValidEnum.VALID_EMAIL.getMessage())
+                .name(TestValidEnum.VALID_NAME.getMessage())
+                .birthday(TestValidEnum.VALID_BIRTHDAY.getMessage())
+                .password(TestValidEnum.VALID_PASSWORD.getMessage()) // 예상되는 암호화된 비밀번호
                 .build();
 
 
@@ -62,7 +60,7 @@ class MemberServiceTest {
                 .name(RoleEnum.ROLE_CUSTOMER.getRoleName())
                 .build();
 
-        given(MemberRepository.existsByEmail(VALID_EMAIL)).willReturn(false);
+        given(MemberRepository.existsByEmail(TestValidEnum.VALID_EMAIL.getMessage())).willReturn(false);
         when(roleRepository.findByName(RoleEnum.ROLE_USER.getRoleName())).thenReturn(Optional.of(userRole));
         when(roleRepository.findByName(RoleEnum.ROLE_CUSTOMER.getRoleName())).thenReturn(Optional.of(userRole));
         when(MemberRepository.save(any(Member.class))).thenReturn(member);
@@ -73,10 +71,10 @@ class MemberServiceTest {
     public void memberSignUpMemberWithValid() throws Exception {
         //given
         MemberSignupDto memberSignupDto = MemberSignupDto.builder()
-                .email(VALID_EMAIL)
-                .name(VALID_NAME)
-                .password(VALID_PASSWORD)
-                .birthday(VALID_PASSWORD)
+                .email(TestValidEnum.VALID_EMAIL.getMessage())
+                .name(TestValidEnum.VALID_NAME.getMessage())
+                .password(TestValidEnum.VALID_PASSWORD.getMessage())
+                .birthday(TestValidEnum.VALID_BIRTHDAY.getMessage())
                 .build();
         //when
         memberService.signUpMember(memberSignupDto);
@@ -89,10 +87,10 @@ class MemberServiceTest {
     public void memberSignUpCustomerWithValid() throws Exception {
         //given
         MemberSignupDto memberSignupDto = MemberSignupDto.builder()
-                .email(VALID_EMAIL)
-                .name(VALID_NAME)
-                .password(VALID_PASSWORD)
-                .birthday(VALID_PASSWORD)
+                .email(TestValidEnum.VALID_EMAIL.getMessage())
+                .name(TestValidEnum.VALID_NAME.getMessage())
+                .password(TestValidEnum.VALID_PASSWORD.getMessage())
+                .birthday(TestValidEnum.VALID_BIRTHDAY.getMessage())
                 .build();
         //when
         memberService.signUpMember(memberSignupDto);
