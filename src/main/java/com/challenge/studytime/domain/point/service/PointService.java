@@ -1,7 +1,6 @@
 package com.challenge.studytime.domain.point.service;
 
 import com.challenge.studytime.domain.member.entity.Member;
-
 import com.challenge.studytime.domain.member.repositry.MemberRepository;
 import com.challenge.studytime.domain.point.dto.requestdto.PointRequestDto;
 import com.challenge.studytime.domain.point.dto.responsedto.PointResponseDto;

@@ -1,6 +1,7 @@
 package com.challenge.studytime.domain.reservation.entity;
 
 import com.challenge.studytime.domain.member.entity.Member;
+import com.challenge.studytime.domain.payment.entity.Payment;
 import com.challenge.studytime.domain.reservation.dto.request.ReservationRequestDto;
 import com.challenge.studytime.domain.studyroom.entity.StudyRoom;
 import lombok.AllArgsConstructor;
@@ -36,6 +37,9 @@ public class Reservation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "study_room_id")
     private StudyRoom studyRoom;
+
+    @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    private Payment payment;
 
     public void setMemberFromReservation(Member member){
         this.member = member;
