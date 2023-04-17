@@ -4,6 +4,7 @@ import com.challenge.studytime.domain.image.entity.ImageData;
 import com.challenge.studytime.domain.member.entity.Member;
 import com.challenge.studytime.domain.study.dto.request.StudyModifyRequestDto;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -24,6 +25,7 @@ class StudyTest {
     }
 
     @Test
+    @DisplayName("스터디 수정 로직 테스트")
     void updateStudyTest() {
         Study study = Study.builder()
                 .id(1L)
@@ -46,6 +48,7 @@ class StudyTest {
     }
 
     @Test
+    @DisplayName("연관 관계 수정 메소드 테스트")
     void addMemberWithStudyTest() {
         Study study = Study.builder()
                 .id(1L)
@@ -66,6 +69,7 @@ class StudyTest {
     }
 
     @Test
+    @DisplayName("감소 로직 테스트")
     void decreaseMembersCountTest() {
         Study study = Study.builder()
                 .id(1L)
@@ -80,6 +84,7 @@ class StudyTest {
     }
 
     @Test
+    @DisplayName("변경 테스트 로직")
     void changeStudyTest() {
         Study study = Study.builder()
                 .id(1L)
