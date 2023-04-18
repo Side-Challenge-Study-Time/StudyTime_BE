@@ -46,7 +46,7 @@
 
 ## 🔍 개발 과정
 ### Back End 블로깅
-- [무건 : 인덱스 적용을 통해 쿼리 성능 튜닝 후 QueryDSL 성능 172->12ms 성능 개선](https://pos04167.tistory.com/178)
+- [무건 : 인덱스 적용을 통해 쿼리 성능 튜닝 후 QueryDSL 성능 159->52ms(67.29%) 성능 개선](https://pos04167.tistory.com/178)
 - [무건 : JMeter를 이용한 Redis 캐싱 전략 Read 성능 TPS 15.0->38.1/sec 개선](https://pos04167.tistory.com/188)
 - [무건 : 프로젝트를 하면서 나는 Git Flow를 어떻게 사용을 했는가?](https://pos04167.tistory.com/186)
 - [무건 : 나는 동시성 이슈를 어떻게 해결을 하였는가](https://pos04167.tistory.com/177)
