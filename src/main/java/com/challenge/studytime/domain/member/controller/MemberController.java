@@ -42,7 +42,7 @@ public class MemberController {
     }
 
     @PostMapping("login")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public MemberLoginResponseDto login(
             @Valid
             @RequestBody MemberLoginDto loginDto

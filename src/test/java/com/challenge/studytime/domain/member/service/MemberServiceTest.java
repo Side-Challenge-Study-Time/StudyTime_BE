@@ -60,7 +60,7 @@ class MemberServiceTest {
                 .name(RoleEnum.ROLE_CUSTOMER.getRoleName())
                 .build();
 
-        given(MemberRepository.existsByEmail(TestValidEnum.VALID_EMAIL.getMessage())).willReturn(false);
+        when(MemberRepository.existsByEmail(TestValidEnum.VALID_EMAIL.getMessage())).thenReturn(false);
         when(roleRepository.findByName(RoleEnum.ROLE_USER.getRoleName())).thenReturn(Optional.of(userRole));
         when(roleRepository.findByName(RoleEnum.ROLE_CUSTOMER.getRoleName())).thenReturn(Optional.of(userRole));
         when(MemberRepository.save(any(Member.class))).thenReturn(member);

@@ -15,18 +15,18 @@ import javax.validation.constraints.Pattern;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberSignupDto {
-    @NotEmpty
+    @NotEmpty(message = " 이메일을 입력하세요")
     @Pattern(regexp = "^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")
     private String email;
 
-    @NotEmpty
+    @NotEmpty(message = "비밀번호를 입력하세요")
     @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*\\W).{8,20}$") // 영문, 특수문자 8자 이상 20자 이하
     private String password;
 
-    @NotBlank
+    @NotBlank(message = "이름을 입력하세요")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "생일을 입력하세요")
     private String birthday;
 }
 

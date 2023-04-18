@@ -17,7 +17,7 @@ public class RefreshTokenController {
     private final RefreshTokenService refreshTokenService;
 
     @DeleteMapping("logout")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void logout(
             @RequestBody RefreshTokenDto refreshTokenDto
     ) {
