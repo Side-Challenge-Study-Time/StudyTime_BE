@@ -18,6 +18,7 @@ import com.challenge.studytime.global.exception.studyroom.NotillegalException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -38,6 +39,13 @@ public class ControllerErrorAdvice {
     public ErrorResponse UsernameNotFoundException() {
         log.error("user not found member");
         return new ErrorResponse("400", "user not found member");
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ErrorResponse MethodArgumentNotValidException() {
+        log.error("user not found member");
+        return new ErrorResponse("400", "MethodArgumentNotValidException");
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
