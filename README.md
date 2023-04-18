@@ -9,15 +9,19 @@
 
 
 # Project Setup
+### Receive Redis Image
 ```
  docker image pull redis
 ```
+### Receive Redis Create
 ```
  docker network create redis-network
 ```
+### Running the Redis server
 ```
  docker run --name local-redis -p 6379:6379 --network redis-network -v redis_temp:/data -d redis:latest redis-server --appendonly yes
 ```
+### Redis-cli access
 ```
  docker run -it --network redis-network --rm redis:latest redis-cli -h local-redis
 ```
