@@ -8,8 +8,19 @@
 <br>
 
 
-프로젝트
-> 1234
+# Project Setup
+```
+ docker image pull redis
+```
+```
+ docker network create redis-network
+```
+```
+ docker run --name local-redis -p 6379:6379 --network redis-network -v redis_temp:/data -d redis:latest redis-server --appendonly yes
+```
+```
+ docker run -it --network redis-network --rm redis:latest redis-cli -h local-redis
+```
 
 ### 팀원소개
 <table>
