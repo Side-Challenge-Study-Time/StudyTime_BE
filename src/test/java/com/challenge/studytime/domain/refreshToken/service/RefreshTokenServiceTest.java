@@ -1,21 +1,19 @@
 package com.challenge.studytime.domain.refreshToken.service;
 
 import com.challenge.studytime.domain.member.entity.Member;
-import com.challenge.studytime.domain.member.repositry.MemberRepository;
 import com.challenge.studytime.domain.refreshToken.dto.request.RefreshTokenDto;
-import com.challenge.studytime.domain.refreshToken.entity.RefreshToken;
 import com.challenge.studytime.domain.refreshToken.repository.RefreshTokenRepositry;
 import com.challenge.studytime.enums.TestValidEnum;
 import com.challenge.studytime.global.exception.member.NotFoundMemberid;
-import com.challenge.studytime.global.jwt.util.JwtTokenizer;
 import com.challenge.studytime.global.redis.RedisService;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
@@ -63,7 +61,7 @@ class RefreshTokenServiceTest {
 
     @Test
     @DisplayName("findRefreshToken With Valid Test")
-    public void findRefreshTokenWithValid() throws Exception{
+    public void findRefreshTokenWithValid() throws Exception {
         //given
         RefreshTokenDto refreshTokenDto = RefreshTokenDto.builder()
                 .refreshToken(REFRESH_TOKEN)
@@ -71,8 +69,31 @@ class RefreshTokenServiceTest {
 
         redisService.setValues(REFRESH_TOKEN);
         //When, Then
-        assertThatThrownBy(()-> refreshTokenService.findRefreshToken(refreshTokenDto))
+        assertThatThrownBy(() -> refreshTokenService.findRefreshToken(refreshTokenDto))
                 .isInstanceOf(NotFoundMemberid.class)
                 .hasMessageContaining("Not Found Member Id:  1");
+    }
+
+
+    @BeforeEach
+    void setUp() {
+        RefreshTokenDto refreshTokenDto = RefreshTokenDto.builder()
+                .refreshToken(REFRESH_TOKEN)
+                .build();
+
+        redisService.setValues(REFRESH_TOKEN);
+    }
+
+    @Test
+    @DisplayName("재발급 토큰 찾기")
+    public void findRefreshToken() throws Exception {
+        RefreshTokenDto refreshTokenDto = RefreshTokenDto.builder()
+                .refreshToken(REFRESH_TOKEN)
+                .build();
+
+        String values = redisService.getValues(REFRESH_TOKEN);
+        //When, Then
+        assertThat(values).isEqualTo(REFRESH_TOKEN);
+
     }
 }
