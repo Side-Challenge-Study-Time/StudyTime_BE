@@ -66,11 +66,13 @@ class MemberServiceTest {
                 .name(RoleEnum.ROLE_CUSTOMER.getRoleName())
                 .build();
 
+
         given(MemberRepository.existsByEmail(TestValidEnum.VALID_EMAIL.getMessage())).willReturn(false);
         given(roleRepository.findByName(RoleEnum.ROLE_USER.getRoleName())).willReturn(Optional.of(userRole));
         given(roleRepository.findByName(RoleEnum.ROLE_CUSTOMER.getRoleName())).willReturn(Optional.of(userRole));
         given(MemberRepository.save(any(Member.class))).willReturn(member);
         given(MemberRepository.existsByEmail(eq("duplication@email.com"))).willThrow(UserEmailDuplicationException.class);
+
     }
 
     @Test

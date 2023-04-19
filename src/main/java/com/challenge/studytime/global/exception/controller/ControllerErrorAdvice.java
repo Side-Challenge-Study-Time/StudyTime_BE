@@ -7,6 +7,9 @@ import com.challenge.studytime.global.exception.coupon.CouponNotAvailableExcepti
 import com.challenge.studytime.global.exception.coupon.NotFoundCoupon;
 import com.challenge.studytime.global.exception.member.NotMatchPassword;
 import com.challenge.studytime.global.exception.member.UserEmailDuplicationException;
+import com.challenge.studytime.global.exception.payment.AlreadyPaidReservation;
+import com.challenge.studytime.global.exception.payment.NotAllowPayment;
+import com.challenge.studytime.global.exception.payment.NotEnoughPoint;
 import com.challenge.studytime.global.exception.refreshToken.NotFoundRefreshToken;
 import com.challenge.studytime.global.exception.reservation.DifferentDateException;
 import com.challenge.studytime.global.exception.reservation.NotFoundReservation;
@@ -15,6 +18,7 @@ import com.challenge.studytime.global.exception.studyroom.NotillegalException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -35,6 +39,13 @@ public class ControllerErrorAdvice {
     public ErrorResponse UsernameNotFoundException() {
         log.error("user not found member");
         return new ErrorResponse("400", "user not found member");
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ErrorResponse MethodArgumentNotValidException() {
+        log.error("user not found member");
+        return new ErrorResponse("400", "MethodArgumentNotValidException");
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -96,5 +107,26 @@ public class ControllerErrorAdvice {
     public ErrorResponse NotFoundReservation(){
         log.error("Not Found Reservation");
         return new ErrorResponse("400", "Not Found Reservation");
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NotEnoughPoint.class)
+    public ErrorResponse NotEnoughPoint(){
+        log.error("Not Enough Point");
+        return new ErrorResponse("400", "Not Enough Point");
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(AlreadyPaidReservation.class)
+    public ErrorResponse AlreadyPaidReservation(){
+        log.error("Already Paid Reservation");
+        return new ErrorResponse("400", "Already Paid Reservation");
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NotAllowPayment.class)
+    public ErrorResponse NotAllowPayment(){
+        log.error("Not Allow Payment");
+        return new ErrorResponse("400", "Not Allow Payment");
     }
 }
