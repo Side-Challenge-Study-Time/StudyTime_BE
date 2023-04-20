@@ -2,6 +2,9 @@ package com.challenge.studytime.domain.study.service;
 
 import com.challenge.studytime.domain.member.entity.Member;
 import com.challenge.studytime.domain.member.repositry.MemberRepository;
+import com.challenge.studytime.domain.role.entity.Role;
+import com.challenge.studytime.domain.role.enums.RoleEnum;
+import com.challenge.studytime.domain.role.repositry.RoleRepository;
 import com.challenge.studytime.domain.study.dto.response.StudyMemberResponse;
 import com.challenge.studytime.domain.study.entity.Study;
 import com.challenge.studytime.domain.study.entity.StudyMember;
@@ -17,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -27,6 +31,7 @@ public class StudyMemberService {
     private final StudyMemberRepository studyMemberRepository;
     private final StudyRepository studyRepository;
     private final MemberRepository MemberRepository;
+    private final RoleRepository roleRepository;
 
     @Transactional
     public void create(Long studyId, LoginUserDto userDto) {
@@ -45,6 +50,9 @@ public class StudyMemberService {
         } else {
             throw new MembersWhoInvalidJoinCount();
         }
+
+        Optional<Role> userRole = roleRepository.findByName(RoleEnum.ROLE_USER.getRoleName());
+        userRole.ifPresent(member::addRole);
 
 
         StudyMember studyMemberS = StudyMember.builder()

@@ -1,7 +1,6 @@
 package com.challenge.studytime.domain.study.controller;
 
 import com.challenge.studytime.domain.study.dto.response.StudyMemberResponse;
-import com.challenge.studytime.domain.study.entity.StudyMember;
 import com.challenge.studytime.domain.study.service.StudyMemberService;
 import com.challenge.studytime.global.util.IfLogin;
 import com.challenge.studytime.global.util.LoginUserDto;
@@ -13,12 +12,12 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/study/member")
+@RequestMapping("/api/study")
 public class StudyMemberController {
 
     private final StudyMemberService studyMemberService;
 
-    @PostMapping("{studyId}")
+    @PostMapping("/member/{studyId}")
     @ResponseStatus(HttpStatus.CREATED)
     public void create(
             @PathVariable Long studyId,
@@ -27,7 +26,7 @@ public class StudyMemberController {
         studyMemberService.create(studyId, userDto);
     }
 
-    @GetMapping("/fullSrch")
+    @GetMapping("/members")
     @ResponseStatus(HttpStatus.OK)
     public List<StudyMemberResponse> findFullSrchStudyMember() {
         return studyMemberService.searchStudyMemberFullSrch();
