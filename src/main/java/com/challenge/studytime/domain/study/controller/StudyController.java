@@ -18,12 +18,12 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/study")
+@RequestMapping("/api")
 public class StudyController {
 
     private final StudyService studyService;
 
-    @PostMapping("register")
+    @PostMapping("/study/register")
     @ResponseStatus(HttpStatus.CREATED)
     public StudyResponseDto registerStudy(
             @IfLogin LoginUserDto userDto,
@@ -32,7 +32,7 @@ public class StudyController {
         return studyService.registerStudyProject(memberId, requestDto);
     }
 
-    @GetMapping("fullSrch")
+    @GetMapping("studies")
     @ResponseStatus(HttpStatus.OK)
     public Page<StudySearcResponseDto> validStudyFullsearch(
             StudySearchDto requestDto,
@@ -43,7 +43,7 @@ public class StudyController {
     }
 
 
-    @GetMapping("detail")
+    @GetMapping("/study/search")
     @ResponseStatus(HttpStatus.OK)
     public List<StudyResponseDto> detailStudy(
             @IfLogin LoginUserDto userDto
@@ -52,7 +52,7 @@ public class StudyController {
         return studyService.detailStudy(memberId);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/studies/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteStudy(
             @PathVariable Long id
@@ -60,7 +60,7 @@ public class StudyController {
         studyService.deleteByStudy(id);
     }
 
-    @PatchMapping("modify/{studyId}")
+    @PatchMapping("/studies/{studyId}")
     @ResponseStatus(HttpStatus.OK)
     public StudyResponseDto modifyStudy(
             @PathVariable Long studyId,

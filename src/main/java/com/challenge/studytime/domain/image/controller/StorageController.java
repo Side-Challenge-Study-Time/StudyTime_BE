@@ -16,12 +16,12 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/image")
+@RequestMapping("/api/study")
 public class StorageController {
 
     final private StorageService storageService;
 
-    @PostMapping("{studyId}")
+    @PostMapping("/image/{studyId}")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> uploadImage(
             @RequestParam("image") MultipartFile file
@@ -32,7 +32,7 @@ public class StorageController {
     }
 
 
-    @GetMapping("/{fileName}")
+    @GetMapping("/image/{fileName}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> downloadImage(@PathVariable("fileName") String fileName) {
         byte[] downloadImage = storageService.downloadImage(fileName);

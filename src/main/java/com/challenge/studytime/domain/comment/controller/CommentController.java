@@ -16,14 +16,14 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/comment")
+@RequestMapping("/api/study")
 public class CommentController {
 
 
     private final CommentService commentService;
     private final CommentRepository commentRepository;
 
-    @PostMapping("{studyId}")
+    @PostMapping("/{studyId}/comment")
     @ResponseStatus(HttpStatus.CREATED)
     public CommentDto create(
             @RequestBody String content,
@@ -33,7 +33,7 @@ public class CommentController {
         return commentService.createParentComment(content, userDto, studyId);
     }
 
-    @PostMapping("/reply/{parentId}")
+    @PostMapping("/comment/{parentId}/reply")
     @ResponseStatus(HttpStatus.CREATED)
     public CommentDto create2(
             @PathVariable Long parentId,
@@ -43,13 +43,13 @@ public class CommentController {
         return commentService.createReplyComment(parentId, content, userDto);
     }
 
-    @GetMapping("/fullSrchReply")
+    @GetMapping("/comments/search")
     @ResponseStatus(HttpStatus.OK)
     public List<CommentDto> getParentCommentsWithReplies() {
         return commentService.fullSrchWithComment();
     }
 
-    @DeleteMapping("{commentId}")
+    @DeleteMapping("/comment/{commentId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteComment(
             @PathVariable Long commentId

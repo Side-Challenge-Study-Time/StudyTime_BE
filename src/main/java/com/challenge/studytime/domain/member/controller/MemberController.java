@@ -15,13 +15,13 @@ import javax.validation.Valid;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/member")
+@RequestMapping("/api")
 public class MemberController {
 
     private final MemberService memberService;
 
 
-    @PostMapping("signUp")
+    @PostMapping("/members/signup")
     @ResponseStatus(HttpStatus.CREATED)
     public MemberSignupResponseDto signUpWithMember(
             @Valid
@@ -31,7 +31,7 @@ public class MemberController {
         return memberService.signUpMember(signupDto);
     }
 
-    @PostMapping("signUpCustomer")
+    @PostMapping("/customers/signup")
     @ResponseStatus(HttpStatus.CREATED)
     public MemberSignupResponseDto signUpWithCustomer(
             @Valid
@@ -41,7 +41,7 @@ public class MemberController {
         return memberService.signUpCustomer(signupDto);
     }
 
-    @PostMapping("login")
+    @PostMapping("/members/login")
     @ResponseStatus(HttpStatus.CREATED)
     public MemberLoginResponseDto login(
             @Valid
