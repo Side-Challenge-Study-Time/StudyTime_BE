@@ -37,7 +37,8 @@ public class SecurityConfig {
                 .httpBasic().disable()
                 .authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-                .mvcMatchers("/api/member/signUp", "/api/member/login", "/api/member/signUpCustomer", "/api/member/logout", "/api/member/refreshToken").permitAll()
+                .mvcMatchers("/api/members/signup", "/api/members/login", "/api/customers/signup",
+                        "/api/members/logout", "/api/members/refreshToken").permitAll()
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(customAuthenticationEntryPoint)
