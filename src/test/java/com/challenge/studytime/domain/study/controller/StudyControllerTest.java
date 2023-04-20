@@ -113,7 +113,7 @@ public class StudyControllerTest {
         String token = jwtTokenizer.createAccessToken(memberId, "test@test.com", List.of("ROLE_USER"));
 
         // when
-        MvcResult result = mockMvc.perform(get("/api/study/detail")
+        MvcResult result = mockMvc.perform(get("/api/study/search")
                         .header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -139,7 +139,7 @@ public class StudyControllerTest {
         Long studyId = 1L;
 
         // when
-        mockMvc.perform(delete("/api/study/delete/{id}", studyId)
+        mockMvc.perform(delete("/api/studies/{id}", studyId)
                         .header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
                 .andExpect(status().isNoContent())
                 .andDo(print());
@@ -175,7 +175,7 @@ public class StudyControllerTest {
         given(studyService.modifyById(studyId, studyModifyRequestDto)).willReturn(expectedResponseDto);
 
         // when
-        MvcResult result = mockMvc.perform(patch("/api/study/modify/{id}", studyId)
+        MvcResult result = mockMvc.perform(patch("/api/studies/{id}", studyId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                         .content(objectMapper.writeValueAsString(studyModifyRequestDto)))

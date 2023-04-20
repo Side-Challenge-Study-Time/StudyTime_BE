@@ -92,7 +92,7 @@ class MemberControllerTest {
     void signUpWithValidAttributes() throws Exception {
         // when
         mockMvc.perform(
-                        post("/api/member/signUp")
+                        post("/api/members/signup")
                                 .contentType(APPLICATION_JSON)
                                 .content("{\"email\":\"test1234@email.com\",\"password\":\"Aa1!bbccddeeff\"," +
                                         "\"name\":\"김무건\",\"birthday\":\"2020-01-01\"}")
@@ -111,7 +111,7 @@ class MemberControllerTest {
     void signUpWithInValidAttributes() throws Exception {
     // when
     mockMvc.perform(
-                    post("/api/member/signUp")
+                    post("/api/members/signup")
                     .contentType(APPLICATION_JSON)
                     .content("{\"email\":\"test12@email.com\",\"password\":\"1234\"," +
                             "\"name\":\"김무건\",\"birthday\":\"2020-01-01\"}")
@@ -126,7 +126,7 @@ class MemberControllerTest {
     void customerSignUpWithValidAttributes() throws Exception {
         // when
         mockMvc.perform(
-                        post("/api/member/signUp")
+                        post("/api/customers/signup")
                                 .contentType(APPLICATION_JSON)
                                 .content("{\"email\":\"test1234@email.com\",\"password\":\"Aa1!bbccddeeff\"," +
                                         "\"name\":\"김무건\",\"birthday\":\"2020-01-01\"}")
@@ -143,7 +143,7 @@ class MemberControllerTest {
     @Test
     @DisplayName("회원가입 실패_Empty Attributes")
     void customerSignUpWithInValidEmptyAttributes() throws Exception {
-        mockMvc.perform(post("/api/member/signUp")
+        mockMvc.perform(post("/api/members/signup")
                         .contentType(APPLICATION_JSON)
                         .content(""))
                 .andExpect(status().isBadRequest())
@@ -155,7 +155,7 @@ class MemberControllerTest {
     void customerSignUpW() throws Exception {
         // when
         mockMvc.perform(
-                        post("/api/member/signUpCustomer")
+                        post("/api/customers/signup")
                                 .contentType(APPLICATION_JSON)
                                 .content("{\"email\":\"test@email.com\",\"password\":\"Aa1!bbccddeeff\"," +
                                         "\"name\":\"김무건\",\"birthday\":\"2020-01-01\"}")
@@ -169,7 +169,7 @@ class MemberControllerTest {
     @DisplayName("판매자 회원가입 실패_json empty")
     @Test
     void signUpCustomerWith_InValidEmptyJson() throws Exception {
-        mockMvc.perform(post("/api/member/signUpCustomer")
+        mockMvc.perform(post("/api/customers/signup")
                         .contentType(APPLICATION_JSON)
                         .content(""))
                 .andExpect(status().isBadRequest())
@@ -181,7 +181,7 @@ class MemberControllerTest {
     void loginWith_ValidDto() throws Exception {
         // when
         mockMvc.perform(
-                        post("/api/member/login")
+                        post("/api/members/login")
                                 .contentType(APPLICATION_JSON)
                                 .content("{\"email\":\"test@email.com\",\"password\":\"Aa1!bbccddeeff\"}")
                 )
