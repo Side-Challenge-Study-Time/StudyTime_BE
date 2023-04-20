@@ -25,7 +25,7 @@ public class CommentController {
 
     @PostMapping("/{studyId}/comment")
     @ResponseStatus(HttpStatus.CREATED)
-    public CommentDto create(
+    public CommentDto createComment(
             @RequestBody String content,
             @IfLogin LoginUserDto userDto,
             @PathVariable Long studyId
@@ -35,7 +35,7 @@ public class CommentController {
 
     @PostMapping("/comment/{parentId}/reply")
     @ResponseStatus(HttpStatus.CREATED)
-    public CommentDto create2(
+    public CommentDto createReply(
             @PathVariable Long parentId,
             @RequestBody String content,
             @IfLogin LoginUserDto userDto
