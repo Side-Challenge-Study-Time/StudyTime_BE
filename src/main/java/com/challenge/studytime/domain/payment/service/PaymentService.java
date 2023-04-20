@@ -42,7 +42,6 @@ public class PaymentService {
         int value = reservation.getStudyRoom().getPrice() *
                 (reservation.getEndDate().getHour() - reservation.getStartDate().getHour());
         int coupon = 0;
-        System.out.println(couponId);
         if (couponId != 0){
             coupon = couponHistory.getCoupon().getDiscountValue();
             if (value <= coupon){
@@ -74,11 +73,14 @@ public class PaymentService {
         return PaymentResponseDto.toDto(payment);
     }
     @Transactional
-    public void cancelPayment(Long memberId,Long reservationId){
+    public void cancelPayment(Long memberId,Long paymentId, Long couponId){
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new NotFoundMemberid(memberId));
-        Reservation reservation = reservationRepository.findById(reservationId)
-                .orElseThrow(() -> new NotFoundReservation());
-        reservationRepository.deleteById(reservation.getId());
+        Payment payment = paymentRepository.findByReservationId(paymentId);
+        member.getPoint().chargePoint(payment.getAmount());
+        CouponHistory couponHistory = couponHistoryRepository.findByCouponIdAndMemberId(couponId, memberId)
+                .orElseThrow(() -> new NotFoundCoupon("쿠폰" + couponId));
+        couponHistory.couponUsed(false);
+        paymentRepository.deleteById(payment.getId());
     }
 }
