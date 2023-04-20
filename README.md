@@ -109,9 +109,7 @@ src
 
 <br>
 
-# ✅API 명세서
-
-## [💻API 명세서](https://documenter.getpostman.com/view/23650109/2s93Y3tfgG)
+## [✅API 명세서](https://documenter.getpostman.com/view/23650109/2s93Y3tfgG)
 
 <br>
 
