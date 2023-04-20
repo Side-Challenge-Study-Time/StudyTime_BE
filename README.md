@@ -109,6 +109,11 @@ src
 
 <br>
 
+## [✅API 명세서](https://documenter.getpostman.com/view/23650109/2s93Y3tfgG)
+
+<br>
+
+
 # 🐌Git Commit Convention
 <table>
   <tr>
@@ -174,9 +179,9 @@ src
 
 # ✍ 우리는 이렇게 Git Flow 전략을 사용하였습니다.
 
-## ✳ [ 참고 ] [강남언니](https://blog.gangnamunni.com/post/understanding_git_flow/)
+## ✳ [ 참고: 강남언니 ](https://blog.gangnamunni.com/post/understanding_git_flow/)
 
-## ✳ [ 우리가 진행한 방식 ] [무건 :블로그 정리](https://pos04167.tistory.com/186)
+## ✳ [우리가 진행한 방식](https://pos04167.tistory.com/186)
 
 <div style="width: 50%; height: auto;">
 
