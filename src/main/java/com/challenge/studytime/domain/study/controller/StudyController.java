@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,7 +28,8 @@ public class StudyController {
     public StudyResponseDto registerStudy(
             @IfLogin LoginUserDto userDto,
             @RequestBody StudyRequestDto requestDto) {
-        return studyService.registerStudyProject(userDto, requestDto);
+        Long memberId = userDto.getMemberId();
+        return studyService.registerStudyProject(memberId, requestDto);
     }
 
     @GetMapping("fullSrch")
@@ -40,12 +42,14 @@ public class StudyController {
         return studyService.fullSearch(requestDto, page, size);
     }
 
-    @GetMapping("detail/{id}")
+
+    @GetMapping("detail")
     @ResponseStatus(HttpStatus.OK)
-    public StudyResponseDto detailStudy(
-            @PathVariable Long id
+    public List<StudyResponseDto> detailStudy(
+            @IfLogin LoginUserDto userDto
     ) {
-        return studyService.detailStudy(id);
+        Long memberId = userDto.getMemberId();
+        return studyService.detailStudy(memberId);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -56,13 +60,13 @@ public class StudyController {
         studyService.deleteByStudy(id);
     }
 
-    @PatchMapping("modify/{id}")
+    @PatchMapping("modify/{studyId}")
     @ResponseStatus(HttpStatus.OK)
     public StudyResponseDto modifyStudy(
-            @PathVariable Long id,
+            @PathVariable Long studyId,
             @Valid @RequestBody StudyModifyRequestDto studyModifyRequestDto
     ) {
-        return studyService.modifyById(id, studyModifyRequestDto);
+        return studyService.modifyById(studyId, studyModifyRequestDto);
     }
 
 }
