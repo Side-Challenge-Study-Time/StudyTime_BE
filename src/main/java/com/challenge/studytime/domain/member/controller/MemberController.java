@@ -24,7 +24,7 @@ public class MemberController {
     @PostMapping("signUp")
     @ResponseStatus(HttpStatus.CREATED)
     public MemberSignupResponseDto signUpWithMember(
-            @Valid @RequestBody MemberSignupDto signupDto
+             @RequestBody MemberSignupDto signupDto
     ) {
         log.info("signupDto:{}", signupDto);
         return memberService.signUpMember(signupDto);
@@ -33,7 +33,7 @@ public class MemberController {
     @PostMapping("signUpCustomer")
     @ResponseStatus(HttpStatus.CREATED)
     public MemberSignupResponseDto signUpWithCustomer(
-            @Valid @RequestBody MemberSignupDto signupDto
+             @RequestBody MemberSignupDto signupDto
     ) {
         log.info("signupDto:{}", signupDto);
         return memberService.signUpCustomer(signupDto);
@@ -42,7 +42,7 @@ public class MemberController {
     @PostMapping("login")
     @ResponseStatus(HttpStatus.OK)
     public MemberLoginResponseDto login(
-            @Valid @RequestBody MemberLoginDto loginDto
+            @RequestBody MemberLoginDto loginDto
     ) {
         log.info("loginDto:{}", loginDto);
         return memberService.login(loginDto);

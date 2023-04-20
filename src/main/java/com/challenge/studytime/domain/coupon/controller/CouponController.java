@@ -17,27 +17,27 @@ import java.util.List;
 public class CouponController {
     private final CouponService couponService;
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/register")
+    @PostMapping()
     public CouponResponseDto registerCoupon(@RequestBody @Valid CouponRequestDto requestDto){
         return couponService.registerCoupon(requestDto);
     }
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/search")
+    @GetMapping()
     public List<CouponResponseDto> detailCoupon(@RequestBody @Valid CouponRequestDto requestDto){
         return couponService.detailCoupon(requestDto.getCouponName());
     }
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/fullSearch")
+    @GetMapping("/search")
     public List<CouponResponseDto> fullSearchCoupon(){
         return couponService.fullSearchCoupon();
     }
     @ResponseStatus(HttpStatus.CREATED)
-    @PatchMapping("/modify")
+    @PatchMapping()
     public String modifyCoupon(@RequestBody @Valid CouponModifyRequestDto couponModifyRequestDto){
        return couponService.modifyCoupon(couponModifyRequestDto);
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/noContent")
+    @DeleteMapping()
     public void deleteByCoupon(@RequestBody @Valid CouponModifyRequestDto couponModifyRequestDto){
         couponService.deleteByCoupon(couponModifyRequestDto.getCouponName());
     }
