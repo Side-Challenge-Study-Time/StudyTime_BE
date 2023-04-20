@@ -8,7 +8,7 @@
 <br>
 
 
-# Project Setup
+# 🐣 Project Setup
 ### Receive Redis Image
 ```
  docker image pull redis
@@ -26,7 +26,7 @@
  docker run -it --network redis-network --rm redis:latest redis-cli -h local-redis
 ```
 
-### 팀원소개
+# 🌞 팀원소개
 <table>
   <tr>
     <td>
@@ -44,7 +44,7 @@
 
 <br>
 
-## 🔍 개발 과정
+# 🔍 개발 과정
 ### Back End 블로깅
 - [무건 : 인덱스 적용을 통해 쿼리 성능 튜닝 후 QueryDSL 성능 159->52ms(67.29%) 성능 개선](https://pos04167.tistory.com/178)
 - [무건 : JMeter를 이용한 Redis 캐싱 전략 Read 성능 TPS 15.0->38.1/sec 개선](https://pos04167.tistory.com/188)
@@ -109,8 +109,8 @@ src
 
 <br>
 
-## [✅API 명세서](https://documenter.getpostman.com/view/23650109/2s93Y3tfgG)
-
+# ✅API 명세서
+[API 명세서 더 보기](https://documenter.getpostman.com/view/23650109/2s93Y3tfgG)
 <br>
 
 
