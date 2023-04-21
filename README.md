@@ -43,6 +43,7 @@
 </table>
 
 <br>
+<br>
 
 # 🔍 개발 과정
 ### Back End 블로깅
@@ -80,6 +81,7 @@ src
 ```
 
 <br>
+<br>
 
 # 👨‍🔧기술 스택
 <div align="left">
@@ -108,11 +110,13 @@ src
 </div>
 
 <br>
+<br>
 
 # ✅API 명세서
 [API 명세서 더 보기](https://documenter.getpostman.com/view/23650109/2s93Y3tfgG)
-<br>
 
+<br>
+<br>
 
 # 🐌Git Commit Convention
 <table>
@@ -179,8 +183,6 @@ src
 
 # ✍ 우리는 이렇게 Git Flow 전략을 사용하였습니다.
 
-## ✳ [ 참고: 강남언니 ](https://blog.gangnamunni.com/post/understanding_git_flow/)
-
 ## ✳ [우리가 진행한 방식](https://pos04167.tistory.com/186)
 
 <div style="width: 50%; height: auto;">
@@ -192,13 +194,14 @@ src
 
 
 <br>
-
-
-# 🧊 ERD Diagram
-![image](https://user-images.githubusercontent.com/103854287/230743169-928d74c7-2983-4780-8bfc-a600b641f9dd.png)
-
 <br>
 
 # 🏛️ Architecture
 ![image](https://user-images.githubusercontent.com/103854287/232328695-004b310c-c6b7-4fa0-849b-842292dcb471.png)
+
+<br>
+<br>
+
+# 🧊 ERD Diagram
+![image](https://user-images.githubusercontent.com/103854287/230743169-928d74c7-2983-4780-8bfc-a600b641f9dd.png)
 
