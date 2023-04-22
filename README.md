@@ -76,6 +76,7 @@ src
        └── <도메인>  # 각도메인 ex : order ,ticket
              └── controller # 도메인 컨트롤러
              └── domain # 도메인 오브젝트
+             └── redis # redis 설정
              └── repostiory # 도메인 리포지토리
              └── service # 도메인 서비스, 도메인 이벤트 핸들러
 ```
