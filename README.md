@@ -58,6 +58,8 @@
 ### DevOps 블로깅
 - [무건 : 백엔드 개발자는 왜 AWS를 배워야 하는가?](https://pos04167.tistory.com/167)
 - [무건 : Jenkins CI/CD는 무엇인가?](https://pos04167.tistory.com/183)
+- [무건 : Jenkins Pipeline을 통한 CI/CD](https://pos04167.tistory.com/195)
+- [무건 : Jenkins Item FreeStyle CI/CD](https://pos04167.tistory.com/192)
 
 <br>
 
