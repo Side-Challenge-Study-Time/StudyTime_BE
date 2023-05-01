@@ -128,8 +128,8 @@ src
 <h3 align="center">문서 / 협업</h3>  
 
 <p align="center">   
-  
-<img src="https://img.shields.io/badge/swagger-#85EA2D?style=for-the-badge&logo=swagger&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white"/>
 <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white"/>
 <img src="https://img.shields.io/badge/Git-F05032.svg?style=for-the-badge&logo=Git&logoColor=white"/>
 <img src="https://img.shields.io/badge/GitHub-181717.svg?style=for-the-badge&logo=GitHub&logoColor=white"/>
