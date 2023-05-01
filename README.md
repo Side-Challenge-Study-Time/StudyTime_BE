@@ -119,7 +119,7 @@ src
 <p align="center">   
 
 <img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white"/>
-<img src="https://img.shields.io/badge/GitHub Actions-2088FF?style=for-the-badge&logo=GitHub Actions&logoColor=white"/>
+<img src="https://img.shields.io/badge/Jenkins-#D24939?style=for-the-badge&logo=Jenkins&logoColor=white"/>
 <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=for-the-badge&logo=Amazon EC2&logoColor=white"/>
 <img src="https://img.shields.io/badge/Amazon RDS-527FFF?style=for-the-badge&logo=Amazon RDS&logoColor=white"/>
   
@@ -129,7 +129,7 @@ src
 
 <p align="center">   
   
-<img src="https://img.shields.io/badge/-Spring%20Rest%20Docs-green?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/swagger-#85EA2D?style=for-the-badge&logo=swagger&logoColor=white"/>
 <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white"/>
 <img src="https://img.shields.io/badge/Git-F05032.svg?style=for-the-badge&logo=Git&logoColor=white"/>
 <img src="https://img.shields.io/badge/GitHub-181717.svg?style=for-the-badge&logo=GitHub&logoColor=white"/>
