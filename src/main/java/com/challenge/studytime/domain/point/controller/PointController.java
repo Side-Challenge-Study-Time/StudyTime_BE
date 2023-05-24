@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class PointController {
     private final PointService pointService;
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/register")
+    @PostMapping()
     public PointResponseDto registerPoint(@IfLogin LoginUserDto userDto,
                                           @RequestBody PointRequestDto requestDto){
         return pointService.registerPoint(userDto.getMemberId(), requestDto);

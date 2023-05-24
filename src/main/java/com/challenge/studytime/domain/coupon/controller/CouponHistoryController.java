@@ -12,28 +12,28 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/couponHistory")
+@RequestMapping("/api/coupon/history")
 @RequiredArgsConstructor
 public class CouponHistoryController {
     private final CouponHistoryService couponHistoryService;
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/register/{couponId}")
+    @PostMapping("/{couponId}")
     public CouponHistoryResponseDto registerCouponHistory(@PathVariable("couponId") Long couponId, @IfLogin LoginUserDto userDto) {
         CouponHistoryResponseDto couponHistoryResponseDto = couponHistoryService.registerCouponHistory(couponId, userDto);
         return couponHistoryResponseDto;
     }
     @ResponseStatus(HttpStatus.CREATED)
-    @GetMapping("/search/user")
+    @GetMapping("/search")
     public List<CouponHistoryResponseDto> SearchCoupon(@IfLogin LoginUserDto userDto){
         return couponHistoryService.detailUserCoupon(userDto);
     }
     @ResponseStatus(HttpStatus.OK)
-    @PatchMapping("/use/{couponId}")
+    @PatchMapping("/{couponId}/use")
     public void useCoupon(@IfLogin LoginUserDto userDto, @PathVariable("couponId") Long couponId){
         couponHistoryService.useCoupon(userDto.getMemberId(), couponId);
     }
     @ResponseStatus(HttpStatus.OK)
-    @PatchMapping("/cancel/{couponId}")
+    @PatchMapping("/{couponId}/cancel")
     public void cancelCouponUsage(@IfLogin LoginUserDto userDto, @PathVariable("couponId") Long couponId){
         couponHistoryService.cancelCouponUsage(userDto.getMemberId(), couponId);
     }

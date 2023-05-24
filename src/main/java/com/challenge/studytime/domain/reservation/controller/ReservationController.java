@@ -18,25 +18,25 @@ import java.util.List;
 public class ReservationController {
     private final ReservationService reservationService;
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/register/{roomId}")
+    @PostMapping("/room/{roomId}")
     public ReservationResponseDto registerReservation(@IfLogin LoginUserDto userDto,
                                                       @PathVariable Long roomId,
                                                       @RequestBody @Valid ReservationRequestDto requestDto){
         return reservationService.registerReservation(userDto.getMemberId(), roomId, requestDto);
     }
     @ResponseStatus(HttpStatus.CREATED)
-    @GetMapping("/fullSearch")
-    public List<ReservationResponseDto> searchStudyRoom(@IfLogin LoginUserDto userDto){
+    @GetMapping("/search")
+    public List<ReservationResponseDto> fullSearchStudyRoom(@IfLogin LoginUserDto userDto){
         return reservationService.fullSearchReservation(userDto.getMemberId());
     }
     @ResponseStatus(HttpStatus.CREATED)
-    @GetMapping("/search/{roomId}")
+    @GetMapping("/room/{roomId}")
     public List<ReservationResponseDto> searchStudyRoom(@IfLogin LoginUserDto userDto,
                                                         @PathVariable Long roomId){
         return reservationService.searchReservation(userDto.getMemberId(), roomId);
     }
     @ResponseStatus(HttpStatus.OK)
-    @PatchMapping("{reservationId}/modify/{roomId}")
+    @PatchMapping("/{reservationId}/room/{roomId}")
     public void modifyReservation(@IfLogin LoginUserDto userDto,
                                   @PathVariable("reservationId") Long reservationId,
                                   @PathVariable("roomId") Long roomId,
@@ -44,7 +44,7 @@ public class ReservationController {
         reservationService.modifyReservation(reservationId, userDto.getMemberId(), roomId, requestDto);
     }
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("{reservationId}/delete/{roomId}")
+    @DeleteMapping("/{reservationId}/room/{roomId}")
     public void deleteReservation(@IfLogin LoginUserDto userDto,
                                   @PathVariable("reservationId") Long reservationId,
                                   @PathVariable("roomId") Long roomId){

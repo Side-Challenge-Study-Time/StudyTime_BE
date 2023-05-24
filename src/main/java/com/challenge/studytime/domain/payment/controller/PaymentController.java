@@ -9,23 +9,33 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/payment")
 @RequiredArgsConstructor
 public class PaymentController {
     private final PaymentService paymentService;
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/{reservationId}/coupon/{couponId}")
+    @PostMapping("reservation/{reservationId}")
     public PaymentResponseDto roomPayment(@IfLogin LoginUserDto userDto,
                                           @PathVariable Long reservationId,
-                                          @PathVariable Long couponId,
+                                          @RequestParam(required = false) Long couponId,
                                           @RequestBody PaymentRequestDto requestDto){
-        return paymentService.roomPayment(userDto.getMemberId(), reservationId,couponId, requestDto);
+        Optional<Long> optionalCouponId = Optional.ofNullable(couponId);
+
+        if(optionalCouponId.isPresent()) {
+            return paymentService.roomPayment(userDto.getMemberId(), reservationId, optionalCouponId.get(), requestDto);
+        }
+        else {
+            return paymentService.roomPayment(userDto.getMemberId(), reservationId, null, requestDto);
+        }
     }
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/cancel/{reservationId}")
-    void cancelPayment(@IfLogin LoginUserDto userDto,
-                       @PathVariable Long reservationId){
-        paymentService.cancelPayment(userDto.getMemberId(), reservationId);
+    @DeleteMapping("/{paymentId}")
+    public void cancelPayment(@IfLogin LoginUserDto userDto,
+                       @PathVariable Long paymentId,
+                       @RequestParam(required = false) Long couponId){
+        paymentService.cancelPayment(userDto.getMemberId(), paymentId, couponId);
     }
 }

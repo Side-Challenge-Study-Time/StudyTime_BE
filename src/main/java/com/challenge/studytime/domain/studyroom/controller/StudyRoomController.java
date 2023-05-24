@@ -14,35 +14,35 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/studyRoom")
+@RequestMapping("/api/room")
 @RequiredArgsConstructor
 public class StudyRoomController {
     private final StudyRoomService studyRoomService;
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/register")
+    @PostMapping()
     public StudyRoomResponseDto registerStudyRoom(@IfLogin LoginUserDto userDto,
                                                   @RequestBody @Valid StudyRoomRequestDto requestDto){
         return studyRoomService.registerStudyRoom(userDto, requestDto);
     }
     @ResponseStatus(HttpStatus.CREATED)
-    @GetMapping("/search/{roomId}")
+    @GetMapping("/{roomId}")
     public List<StudyRoomResponseDto> searchStudyRoom(@PathVariable Long roomId){
         return studyRoomService.detailStudyRoom(roomId);
     }
     @ResponseStatus(HttpStatus.CREATED)
-    @GetMapping("/fullSearch")
+    @GetMapping("/search")
     public List<StudyRoomResponseDto> fullSearchStudyRoom(){
         return studyRoomService.fullSearchStudyRoom();
     }
     @ResponseStatus(HttpStatus.OK)
-    @PatchMapping("/modify/{roomId}")
+    @PatchMapping("/{roomId}")
     public void modifyStudyRoom(@IfLogin LoginUserDto userDto,
                                 @PathVariable Long roomId,
                                 @RequestBody StudyRoomModifyRequestDto requestDto){
         studyRoomService.modifyStudyRoom(userDto.getMemberId(), roomId, requestDto);
     }
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/delete/{roomId}")
+    @DeleteMapping("/{roomId}")
     public void deleteStudyRoom(@PathVariable Long roomId){
         studyRoomService.deleteStudyRoom(roomId);
     }
