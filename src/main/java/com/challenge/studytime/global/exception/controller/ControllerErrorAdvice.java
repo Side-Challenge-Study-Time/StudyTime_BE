@@ -10,8 +10,6 @@ import com.challenge.studytime.global.exception.member.UserEmailDuplicationExcep
 import com.challenge.studytime.global.exception.payment.AlreadyPaidReservation;
 import com.challenge.studytime.global.exception.payment.NotAllowPayment;
 import com.challenge.studytime.global.exception.payment.NotEnoughPoint;
-import com.challenge.studytime.global.exception.payment.NotFoundPayment;
-import com.challenge.studytime.global.exception.refreshToken.NotFoundRefreshToken;
 import com.challenge.studytime.global.exception.reservation.DifferentDateException;
 import com.challenge.studytime.global.exception.reservation.NotFoundReservation;
 import com.challenge.studytime.global.exception.studyroom.NotFoundStudyRoom;
@@ -131,10 +129,4 @@ public class ControllerErrorAdvice {
         return new ErrorResponse("400", "Not Allow Payment");
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(NotFoundPayment.class)
-    public ErrorResponse NotFoundPayment(){
-        log.error("Not Found Payment");
-        return new ErrorResponse("400", "Not Found Payment");
-    }
 }

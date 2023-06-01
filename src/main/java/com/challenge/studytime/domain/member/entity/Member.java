@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class Member {
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Study> studyList = new ArrayList<>();
 
+    @BatchSize(size = 100)
     @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StudyMember> studyMembers = new ArrayList<>();
@@ -56,6 +58,7 @@ public class Member {
     @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CouponHistory> couponHistories = new ArrayList<>();
+
     @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StudyRoom> studyRooms = new ArrayList<>();

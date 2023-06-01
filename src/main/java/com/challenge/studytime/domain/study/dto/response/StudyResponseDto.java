@@ -1,10 +1,13 @@
 package com.challenge.studytime.domain.study.dto.response;
 
 import com.challenge.studytime.domain.study.entity.Study;
+import com.challenge.studytime.domain.study.entity.StudyMember;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -13,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class StudyResponseDto {
     private String title;
     private String content;
-    private int membersCount;
+    private Integer membersCount;
 
     public static StudyResponseDto toDto(Study study) {
         return StudyResponseDto.builder()
@@ -21,5 +24,11 @@ public class StudyResponseDto {
                 .title(study.getTitle())
                 .membersCount(study.getMembersCount())
                 .build();
+    }
+
+    public StudyResponseDto(Study study) {
+        this.title = study.getTitle();
+        this.content = study.getContent();
+        this.membersCount = study.getMembersCount();
     }
 }

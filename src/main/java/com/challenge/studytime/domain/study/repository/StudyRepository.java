@@ -16,6 +16,10 @@ public interface StudyRepository extends JpaRepository<Study, Long>, StudyReposi
     @Query("select s from Study s where s.id=:id AND s.deleteStudy=false ")
     Optional<Study> findByIdAndDeleteStudyFalse(@Param("id") Long id);
 
-    @Query("select s from Study s where s.member.id=:memberId")
-    List<Study> findByMemberId(@Param("memberId") Long memberId);
+//        @Query("select s from Study s where s.member.id=:memberId")
+@Query("SELECT DISTINCT s FROM Study s " +
+        "JOIN FETCH s.member m " +
+        "JOIN FETCH s.studyMembers sm " +
+        "WHERE m.id = :memberId")
+    List<Study> findCustomId(@Param("memberId") Long memberId);
 }

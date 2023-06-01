@@ -23,4 +23,10 @@ public class StudyMemberResponse {
                 .studyId(studyMember.getStudy().getId())
                 .build();
     }
+
+    public StudyMemberResponse(StudyMember studyMember) {
+        this.id = studyMember.getId();
+        this.memberId = studyMember.getMember().getId();
+        this.studyId = studyMember.getStudy().getId();
+    }
 }

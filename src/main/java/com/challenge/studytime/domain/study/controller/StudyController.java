@@ -3,6 +3,7 @@ package com.challenge.studytime.domain.study.controller;
 import com.challenge.studytime.domain.study.dto.request.StudyModifyRequestDto;
 import com.challenge.studytime.domain.study.dto.request.StudyRequestDto;
 import com.challenge.studytime.domain.study.dto.request.StudySearchDto;
+import com.challenge.studytime.domain.study.dto.response.MemberStudyMemberDto;
 import com.challenge.studytime.domain.study.dto.response.StudyResponseDto;
 import com.challenge.studytime.domain.study.dto.response.StudySearcResponseDto;
 import com.challenge.studytime.domain.study.service.StudyService;
@@ -45,7 +46,7 @@ public class StudyController {
 
     @GetMapping("/study/search")
     @ResponseStatus(HttpStatus.OK)
-    public List<StudyResponseDto> detailStudy(
+    public List<MemberStudyMemberDto> detailStudy(
             @IfLogin LoginUserDto userDto
     ) {
         Long memberId = userDto.getMemberId();

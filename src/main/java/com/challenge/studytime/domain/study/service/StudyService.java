@@ -8,6 +8,7 @@ import com.challenge.studytime.domain.role.repositry.RoleRepository;
 import com.challenge.studytime.domain.study.dto.request.StudyModifyRequestDto;
 import com.challenge.studytime.domain.study.dto.request.StudyRequestDto;
 import com.challenge.studytime.domain.study.dto.request.StudySearchDto;
+import com.challenge.studytime.domain.study.dto.response.MemberStudyMemberDto;
 import com.challenge.studytime.domain.study.dto.response.StudyResponseDto;
 import com.challenge.studytime.domain.study.dto.response.StudySearcResponseDto;
 import com.challenge.studytime.domain.study.entity.Study;
@@ -72,16 +73,16 @@ public class StudyService {
 
     @Transactional(readOnly = true)
     @Cacheable(key = "#memberId",value = STUDY_LIST, cacheManager = "redisCacheManager")
-    public List<StudyResponseDto> detailStudy(Long memberId) {
+    public  List<MemberStudyMemberDto>  detailStudy(Long memberId) {
 
         Member member = MemberRepository.findById(memberId)
                 .orElseThrow(() -> new NotFoundMemberid(memberId));
 
-        List<Study> studies = studyRepository.findByMemberId(member.getId());
+        List<Member> result = MemberRepository.findCustomId(memberId);
 
-        return studies.stream()
-                .map(StudyResponseDto::toDto)
+        return result.stream().map(MemberStudyMemberDto::new)
                 .collect(Collectors.toList());
+
     }
 
     @Transactional
