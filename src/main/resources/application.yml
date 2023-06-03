@@ -2,6 +2,7 @@ spring:
   config:
     activate:
       on-profile: local
+
   redis:
     host: localhost
     port: 6379
@@ -13,9 +14,15 @@ spring:
       namespace: spring:session
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DB_URL}
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
+    url: ${MySQL_URL}
+    username: ${USERNAME}
+    password: ${PASSWORD}
+    hikari:
+      connectionTimeout: 30000
+      maximumPoolSize: 20
+      maxLifetime: 295000
+      poolName: HikariCP
+      readOnly: false
   jpa:
     hibernate:
       ddl-auto: create
@@ -25,14 +32,14 @@ spring:
         format_sql: true
         default_batch_fetch_size: 100
 
-jwt:
-  secretKey: ${secretKey}
-  refreshKey: ${refreshKey}
+server:
+  tomcat:
+    threads:
+      max: 18
+      min-spare: 18
+    accept-count: 300
+  port: 8080
 
----
-spring:
-  redis:
-    host: localhost
-    port: 6379
-  profiles:
-    active: local
+jwt:
+  secretKey: ${secret_key}
+  refreshKey: ${refresh_key}
